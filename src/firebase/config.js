@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import "firebase/firestore";
 var firebaseConfig = {
   apiKey: "AIzaSyDyu6Ysa6UhBCODJ_4n1vJbHYEt7n-r-ow",
   authDomain: "keep-clone-d694d.firebaseapp.com",
@@ -9,3 +10,6 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+const projFirestore = firebase.firestore();
+const lastModified = firebase.firestore.FieldValue.serverTimestamp();
+export { projFirestore, lastModified };
