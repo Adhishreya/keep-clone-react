@@ -6,4 +6,5 @@ import { withStyles } from "@material-ui/core/styles";
 const BottomBarItem = () => {
   return <div>BottomBarItem</div>;
 };
-export default BottomBarItem;
+// export default BottomBarItem;
+export default withStyles(styles)(BottomBarItem);

@@ -2,11 +2,17 @@ import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
-// import { withStyles } from "@material-ui/core/styles";
-const Editor = () => {
+import DeleteIcon from "@material-ui/icons/Delete";
+import { withStyles } from "@material-ui/core/styles";
+const Editor = ({ classes }) => {
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
+
+  // useEffect(()=>{
+  // // update()
+  // },[text])
+
   const update = async (val) => {
     await setText(val);
     //asynchronously keep updating state
@@ -18,11 +24,15 @@ const Editor = () => {
     console.log("updating");
   }, 1500);
   return (
-    <div>
+    <div className={classes.editorContainer}>
       <ReactQuill value={text} onChange={update} />
+      {/* <DeleteIcon /> */}
     </div>
   );
 };
-export default Editor;
+// export default Editor;
+export default withStyles(styles)(Editor);
+//styles is function defined in styles.js...comprises of bunch of classes
+
 //https://youtu.be/I250xdtUvy8?t=1485
 //matertial ui styling can be done later

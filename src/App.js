@@ -25,10 +25,10 @@ const App = () => {
     // console.log(note);
   }, [collection]);
   return (
-    <div className="App">
+    <div className="app-container App">
       <h1>Keep</h1>
       <Editor />
-      <BottomBar />
+      <BottomBar selectNoteIndex={selectNoteIndex} note={note} />
     </div>
   );
 };
