@@ -13,10 +13,13 @@ const Editor = ({ classes }) => {
   // // update()
   // },[text])
 
-  const update = async (val) => {
-    await setText(val);
+  const update = (val) => {
+    async function change(vals) {
+      await setText(vals);
+      c_update();
+    }
+    change(val);
     //asynchronously keep updating state
-    c_update();
   };
   //continuouly wait for user to stop typing for few seconds and immediately launch a http request to the firebase tore to save the text
 
