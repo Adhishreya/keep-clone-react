@@ -1,2 +1,2 @@
-Day2: https://youtu.be/I250xdtUvy8?t=2331
+Day3: https://www.youtube.com/watch?v=I250xdtUvy8&t=2331s
 https://github.com/portexe/evernote-clone

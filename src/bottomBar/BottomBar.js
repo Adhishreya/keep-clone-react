@@ -2,19 +2,69 @@ import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
-import { Button } from "@material-ui/core";
+import { Button, List } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
+import BottomBarItem from "../bottomBarItem/BottomBarItem.js";
 const BottomBar = ({ note, classes, selectNoteIndex }) => {
   const [addnote, setAddNote] = useState(false);
-  const [title, seTitle] = useState(null);
+  const [title, setTitle] = useState(null);
   // const { note, selectNoteIndex } = this.props;
   // classes
-  const btnClick = (e) => {};
+  const btnClick = (e) => {
+    console.log("new btn clicked");
+    setAddNote(!addnote);
+  };
+  const updateFile = (e) => {
+    // console.log("update file");
+    setTitle(e.target.value);
+    console.log(title);
+  };
+  const submitNote = () => {
+    console.log("submit file");
+  };
+  const selectNote = () => {
+    console.log("select note");
+  };
+  const deleteNote = () => {
+    console.log("delete note");
+  };
   return (
-    <div className={classes.sidebarContainer}>
-      <Button className={classes.newNoteBtn} onClick={() => btnClick}>
-        Button
-      </Button>
+    <div>
+      {note ? (
+        <div className={classes.sidebarContainer}>
+          <Button className={classes.newNoteBtn} onClick={(e) => btnClick(e)}>
+            {addnote ? "Cancel" : "New Note"}
+          </Button>
+          {addnote ? (
+            <div>
+              <input
+                type="text"
+                placeholder="enter title"
+                onKeyUp={(e) => updateFile(e)}
+              />
+              <Button onClick={submitNote}>Submit Note</Button>
+            </div>
+          ) : null}
+
+          <List>
+            {note.map((n, index) => {
+              return (
+                <div key={index}>
+                  <BottomBarItem
+                    note={n}
+                    index={index}
+                    selectNoteIndex={selectNoteIndex}
+                    selectNote={selectNote}
+                    deleteNote={deleteNote}
+                  />
+                </div>
+              );
+            })}
+          </List>
+        </div>
+      ) : (
+        <div></div>
+      )}
     </div>
   );
 };

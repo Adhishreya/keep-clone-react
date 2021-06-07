@@ -5,6 +5,8 @@ import Editor from "./editor/Editor.js";
 import BottomBar from "./bottomBar/BottomBar.js";
 import firebase from "firebase";
 const App = () => {
+  var provider = new firebase.auth.GoogleAuthProvider();
+
   const [selectNoteIndex, setNodeIndex] = useState(null);
   const [selectNote, setSelectNote] = useState(null);
   const [note, setNote] = useState(null);
@@ -24,11 +26,23 @@ const App = () => {
       });
     // console.log(note);
   }, [collection]);
+
+  // function selectNote() {
+  //   console.log("select note");
+  // }
+  // const deleteNote = () => {
+  //   console.log("delete note");
+  // };
   return (
     <div className="app-container App">
       <h1>Keep</h1>
       <Editor />
-      <BottomBar selectNoteIndex={selectNoteIndex} note={note} />
+      <BottomBar
+        selectNoteIndex={selectNoteIndex}
+        note={note}
+        // selectNote={selectNote}
+        // deleteNote={deleteNote}
+      />
     </div>
   );
 };
