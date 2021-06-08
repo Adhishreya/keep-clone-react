@@ -4,7 +4,7 @@ import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { withStyles } from "@material-ui/core/styles";
-const Editor = ({ classes }) => {
+const Editor = ({ classes, selectNote, selectNoteIndex, note }) => {
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
@@ -12,7 +12,11 @@ const Editor = ({ classes }) => {
   // useEffect(()=>{
   // // update()
   // },[text])
-
+  useEffect(() => {
+    // setText(selectNote.title);
+    // setText(selectNote.body);
+    setId(selectNoteIndex);
+  }, []);
   const update = (val) => {
     async function change(vals) {
       await setText(vals);

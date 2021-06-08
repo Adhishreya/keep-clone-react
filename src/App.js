@@ -21,27 +21,32 @@ const App = () => {
           data["id"] = doc.id;
           return data;
         });
-        console.log(notes);
+        // console.log(notes);
         setNote(notes);
       });
     // console.log(note);
   }, [collection]);
 
-  // function selectNote() {
-  //   console.log("select note");
-  // }
-  // const deleteNote = () => {
-  //   console.log("delete note");
-  // };
+  function selectNotes(note, index) {
+    setNodeIndex(index);
+    setSelectNote(note);
+  }
+  const deleteNotes = () => {};
   return (
     <div className="app-container App">
       <h1>Keep</h1>
-      <Editor />
+      {selectNote ? (
+        <Editor
+          selectedNote={selectNote}
+          selectNoteIndex={selectNoteIndex}
+          note={note}
+        />
+      ) : null}
       <BottomBar
         selectNoteIndex={selectNoteIndex}
         note={note}
-        // selectNote={selectNote}
-        // deleteNote={deleteNote}
+        selectNotes={selectNotes}
+        deleteNotes={deleteNotes}
       />
     </div>
   );

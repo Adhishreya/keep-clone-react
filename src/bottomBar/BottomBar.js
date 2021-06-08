@@ -5,7 +5,13 @@ import styles from "./styles.js";
 import { Button, List } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import BottomBarItem from "../bottomBarItem/BottomBarItem.js";
-const BottomBar = ({ note, classes, selectNoteIndex }) => {
+const BottomBar = ({
+  note,
+  classes,
+  selectNoteIndex,
+  selectNotes,
+  deleteNotes
+}) => {
   const [addnote, setAddNote] = useState(false);
   const [title, setTitle] = useState(null);
   // const { note, selectNoteIndex } = this.props;
@@ -22,8 +28,10 @@ const BottomBar = ({ note, classes, selectNoteIndex }) => {
   const submitNote = () => {
     console.log("submit file");
   };
-  const selectNote = () => {
-    console.log("select note");
+  const selectNote = (note, index) => {
+    // console.log("select note");
+    selectNotes(note, index);
+    console.log(note);
   };
   const deleteNote = () => {
     console.log("delete note");
