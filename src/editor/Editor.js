@@ -24,7 +24,7 @@ const Editor = ({
     setTitle(selectedNote.title);
     setText(selectedNote.body);
     setId(selectedNote.id);
-  },  [selectedNote.id]);
+  }, [selectedNote.id]);
   const update = (val) => {
     async function change(vals) {
       await setText(vals);

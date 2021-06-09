@@ -7,7 +7,7 @@ import firebase from "firebase";
 const App = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
 
-  const [selectNoteIndex, setNodeIndex] = useState(null);
+  const [selectNoteIndex, setNoteIndex] = useState(null);
   const [selectNote, setSelectNote] = useState(null);
   const [note, setNote] = useState(null);
   const collection = "notes";
@@ -28,7 +28,7 @@ const App = () => {
   }, [collection]);
 
   function selectNotes(note, index) {
-    setNodeIndex(index);
+    setNoteIndex(index);
     setSelectNote(note);
     // console.log(selectNote);
   }
@@ -42,8 +42,31 @@ const App = () => {
     const newId = newFromDB.id;
     await setNote([...note, notes]);
     const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);
-    setNodeIndex(newNteINdex);
+    setNoteIndex(newNteINdex);
     setSelectNote(note[newNteINdex]);
+  };
+
+  const deleteNotes = (not) => {
+    const delIndex = note.indexOf(not);
+    if (delIndex == selectNoteIndex) {
+      setSelectNote(null);
+      setNoteIndex(null);
+    } else {
+      if (note.length > 1) {
+        selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1);
+      } else {
+        setSelectNote(null);
+        setNoteIndex(null);
+      }
+
+      // note.length > 1
+      //   ? selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1)
+      //   : (setSelectNote(null)
+      //   setNoteIndex(null)
+      //   )
+      //      setNoteIndex(null);}
+    }
+    firebase.firestore().collection("notes").doc(not.id).delete();
   };
   function noteUpdate(index, noteObj) {
     console.log(index);
@@ -53,7 +76,7 @@ const App = () => {
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
   }
-  const deleteNotes = () => {};
+  // const deleteNotes = () => {};
   return (
     <div className="app-container App">
       <h1>Keep</h1>

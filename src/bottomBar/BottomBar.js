@@ -37,8 +37,9 @@ const BottomBar = ({
     selectNotes(note, index);
     // console.log(note, index);
   };
-  const deleteNote = () => {
-    console.log("delete note");
+  const deleteNote = (note) => {
+    // console.log("delete note");
+    deleteNotes(note);
   };
   return (
     <div>
