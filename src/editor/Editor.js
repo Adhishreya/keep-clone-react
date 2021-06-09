@@ -4,7 +4,13 @@ import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { withStyles } from "@material-ui/core/styles";
-const Editor = ({ classes, selectNote, selectNoteIndex, note }) => {
+const Editor = ({
+  classes,
+  selectedNote,
+  selectNoteIndex,
+  note,
+  noteUpdate
+}) => {
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
@@ -12,11 +18,13 @@ const Editor = ({ classes, selectNote, selectNoteIndex, note }) => {
   // useEffect(()=>{
   // // update()
   // },[text])
+  // console.log(selectedNote);
   useEffect(() => {
-    // setText(selectNote.title);
-    // setText(selectNote.body);
-    setId(selectNoteIndex);
-  }, []);
+    // console.log(selectedNote);
+    setTitle(selectedNote.title);
+    setText(selectedNote.body);
+    setId(selectedNote.id);
+  },  [selectedNote.id]);
   const update = (val) => {
     async function change(vals) {
       await setText(vals);
@@ -28,7 +36,9 @@ const Editor = ({ classes, selectNote, selectNoteIndex, note }) => {
   //continuouly wait for user to stop typing for few seconds and immediately launch a http request to the firebase tore to save the text
 
   var c_update = debounce(() => {
-    console.log("updating");
+    // console.log("updating");
+
+    noteUpdate(selectedNote.id, { title: title, body: text });
   }, 1500);
   return (
     <div className={classes.editorContainer}>

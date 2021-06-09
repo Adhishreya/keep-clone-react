@@ -1,5 +1,5 @@
 import "./styles.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { projectFirestore } from "./firebase/config.js";
 import Editor from "./editor/Editor.js";
 import BottomBar from "./bottomBar/BottomBar.js";
@@ -30,6 +30,28 @@ const App = () => {
   function selectNotes(note, index) {
     setNodeIndex(index);
     setSelectNote(note);
+    // console.log(selectNote);
+  }
+  const newNote = async (title) => {
+    const notes = { title: title, body: "" };
+    const newFromDB = await firebase.firestore().collection("notes").add({
+      title: notes.title,
+      body: notes.body,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
+    const newId = newFromDB.id;
+    await setNote([...note, notes]);
+    const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);
+    setNodeIndex(newNteINdex);
+    setSelectNote(note[newNteINdex]);
+  };
+  function noteUpdate(index, noteObj) {
+    console.log(index);
+    firebase.firestore().collection("notes").doc(index).update({
+      title: noteObj.title,
+      body: noteObj.body,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    });
   }
   const deleteNotes = () => {};
   return (
@@ -40,6 +62,7 @@ const App = () => {
           selectedNote={selectNote}
           selectNoteIndex={selectNoteIndex}
           note={note}
+          noteUpdate={noteUpdate}
         />
       ) : null}
       <BottomBar
@@ -47,6 +70,7 @@ const App = () => {
         note={note}
         selectNotes={selectNotes}
         deleteNotes={deleteNotes}
+        newNote={newNote}
       />
     </div>
   );

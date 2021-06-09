@@ -10,7 +10,8 @@ const BottomBar = ({
   classes,
   selectNoteIndex,
   selectNotes,
-  deleteNotes
+  deleteNotes,
+  newNote
 }) => {
   const [addnote, setAddNote] = useState(false);
   const [title, setTitle] = useState(null);
@@ -26,12 +27,15 @@ const BottomBar = ({
     console.log(title);
   };
   const submitNote = () => {
-    console.log("submit file");
+    // console.log("submit file");
+    newNote(title);
+    setTitle("");
+    setAddNote(false);
   };
   const selectNote = (note, index) => {
     // console.log("select note");
     selectNotes(note, index);
-    console.log(note);
+    // console.log(note, index);
   };
   const deleteNote = () => {
     console.log("delete note");
