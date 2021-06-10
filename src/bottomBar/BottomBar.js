@@ -2,17 +2,37 @@ import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
-import { Button, List } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
+import { Button, List, Grid } from "@material-ui/core";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import BottomBarItem from "../bottomBarItem/BottomBarItem.js";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    overflow: "hidden",
+    backgroundColor: theme.palette.background.paper
+  },
+  gridList: {
+    width: 500,
+    height: 450
+  },
+  icon: {
+    color: "rgba(255, 255, 255, 0.54)"
+  }
+}));
+
 const BottomBar = ({
   note,
-  classes,
+  // classes,
   selectNoteIndex,
   selectNotes,
   deleteNotes,
   newNote
 }) => {
+  const classes = useStyles();
+
   const [addnote, setAddNote] = useState(false);
   const [title, setTitle] = useState(null);
   // const { note, selectNoteIndex } = this.props;
@@ -44,7 +64,8 @@ const BottomBar = ({
   return (
     <div>
       {note ? (
-        <div className={classes.sidebarContainer}>
+        <div>
+          {/* classes.sidebarContainer */}
           <Button className={classes.newNoteBtn} onClick={(e) => btnClick(e)}>
             {addnote ? "Cancel" : "New Note"}
           </Button>
@@ -59,10 +80,14 @@ const BottomBar = ({
             </div>
           ) : null}
 
-          <List>
+          <div className={classes.root}>
             {note.map((n, index) => {
               return (
-                <div key={index}>
+                <div
+                  key={index}
+                  alignItems="flex-start"
+                  className={classes.gridList}
+                >
                   <BottomBarItem
                     note={n}
                     index={index}
@@ -73,7 +98,7 @@ const BottomBar = ({
                 </div>
               );
             })}
-          </List>
+          </div>
         </div>
       ) : (
         <div></div>
