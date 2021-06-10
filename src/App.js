@@ -46,7 +46,8 @@ const App = () => {
     setSelectNote(note[newNteINdex]);
   };
 
-  const deleteNotes = (not) => {
+  const deleteNotes = async (not) => {
+    await setNote(note.filter((n) => not != n));
     const delIndex = note.indexOf(not);
     if (delIndex == selectNoteIndex) {
       setSelectNote(null);

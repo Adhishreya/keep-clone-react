@@ -3,6 +3,7 @@ import ReactQuill from "react-quill";
 import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
 import DeleteIcon from "@material-ui/icons/Delete";
+import BorderColorIcon from "@material-ui/icons/BorderColor";
 import { withStyles } from "@material-ui/core/styles";
 const Editor = ({
   classes,
@@ -25,12 +26,22 @@ const Editor = ({
     setText(selectedNote.body);
     setId(selectedNote.id);
   }, [selectedNote.id]);
-  const update = (val) => {
+  const updateBody = (val) => {
     async function change(vals) {
       await setText(vals);
       c_update();
     }
     change(val);
+    //asynchronously keep updating state
+  };
+  //continuouly wait for user to stop typing for few seconds and immediately launch a http request to the firebase tore to save the text
+
+  const updateTitle = (e) => {
+    async function change(e) {
+      await setTitle(e.target.value);
+      c_update();
+    }
+    change(e);
     //asynchronously keep updating state
   };
   //continuouly wait for user to stop typing for few seconds and immediately launch a http request to the firebase tore to save the text
@@ -42,7 +53,15 @@ const Editor = ({
   }, 1500);
   return (
     <div className={classes.editorContainer}>
-      <ReactQuill value={text} onChange={update} />
+      <BorderColorIcon></BorderColorIcon>
+      <input
+        type="text"
+        style={{ color: "black" }}
+        placeholder="Note title...."
+        value={title ? title : ""}
+        onChange={(e) => updateTitle(e)}
+      />
+      <ReactQuill value={text} onChange={updateBody} />
       {/* <DeleteIcon /> */}
     </div>
   );
