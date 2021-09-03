@@ -4,18 +4,23 @@ import { projectFirestore } from "./firebase/config.js";
 import Editor from "./editor/Editor.js";
 import BottomBar from "./bottomBar/BottomBar.js";
 import firebase from "firebase";
+import styles from './App.module.css';
+import {Menu,Search,Refresh,ViewStream,Apps,Settings, AccountCircle} from '@material-ui/icons';
+import { Typography ,AppBar,InputBase} from "@material-ui/core";
 const App = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
 
   const [selectNoteIndex, setNoteIndex] = useState(null);
   const [selectNote, setSelectNote] = useState(null);
   const [note, setNote] = useState(null);
+  const [listVew,setListView] = useState(true);
   const collection = "notes";
   useEffect(() => {
     firebase
       .firestore()
       .collection(collection)
       .onSnapshot((serverUpdate) => {
+        //every time a connection is updated a snapshot of the current state in the database is obtained and the corresponding ids of the documents are being tracked
         const notes = serverUpdate.docs.map((doc) => {
           const data = doc.data();
           data["id"] = doc.id;
@@ -31,6 +36,7 @@ const App = () => {
     setNoteIndex(index);
     setSelectNote(note);
     // console.log(selectNote);
+    //when a note is selected , obtain its data and set the state
   }
   const newNote = async (title) => {
     const notes = { title: title, body: "" };
@@ -79,8 +85,37 @@ const App = () => {
   }
   // const deleteNotes = () => {};
   return (
+
     <div className="app-container App">
-      <h1>Keep</h1>
+      
+    <AppBar className={styles.containerBar}>
+    <Menu className={styles.hamburger}/>
+    <img src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png" alt="KeepIcon" className={styles.image}/>
+    <Typography color="textSecondary" className={styles.heading}>Keep</Typography>
+
+    <div className={styles.search}>
+            {/* <div > */}
+              <Search className={styles.searchIcon}/>
+            {/* </div> */}
+            <InputBase
+              placeholder="Search…"
+              // classes={{
+              //   root: styles.inputRoot,
+              //   input: styles.inputInput,
+              // }}
+              className={styles.input}
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </div>
+    <Refresh className={styles.refresh}/>
+    {listVew ? <ViewStream className={styles.view} onClick={()=>{setListView(false)}}/> : <App/>}
+    <Settings className={styles.setting}/>
+    <Apps className={styles.apps}/>
+    <AccountCircle className={styles.account}/>
+    </AppBar>
+      <div className={styles.contents}>
+
+      
       {selectNote ? (
         <Editor
           selectedNote={selectNote}
@@ -97,7 +132,9 @@ const App = () => {
         newNote={newNote}
       />
     </div>
+    </div>
   );
+  
 };
 
 export default App;

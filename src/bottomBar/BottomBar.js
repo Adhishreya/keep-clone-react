@@ -66,19 +66,24 @@ const BottomBar = ({
       {note ? (
         <div>
           {/* classes.sidebarContainer */}
+
+{/* 
           <Button className={classes.newNoteBtn} onClick={(e) => btnClick(e)}>
             {addnote ? "Cancel" : "New Note"}
-          </Button>
-          {addnote ? (
+          </Button> */}
+
+
+          {/* {addnote ? ( */}
             <div>
-              <input
+               <input class="ql-editor" data-gramm="false" contenteditable="true" onKeyUp={(e) => updateFile(e)} placeholder="title"/>
+              {/* <input
                 type="text"
                 placeholder="enter title"
                 onKeyUp={(e) => updateFile(e)}
-              />
+              /> */}
               <Button onClick={submitNote}>Submit Note</Button>
             </div>
-          ) : null}
+          {/* ) : null} */}
 
           <div className={classes.root}>
             {note.map((n, index) => {

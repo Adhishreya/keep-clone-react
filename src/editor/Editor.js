@@ -53,7 +53,7 @@ const Editor = ({
   }, 1500);
   return (
     <div className={classes.editorContainer}>
-      <BorderColorIcon></BorderColorIcon>
+      {/* <BorderColorIcon></BorderColorIcon> */}
       <input
         type="text"
         style={{ color: "black" }}
@@ -61,7 +61,9 @@ const Editor = ({
         value={title ? title : ""}
         onChange={(e) => updateTitle(e)}
       />
-      <ReactQuill value={text} onChange={updateBody} />
+     
+      <ReactQuill value={text} onChange={updateBody}  className={classes.inputArea} placeholder="Take a nte..."/>
+      
       {/* <DeleteIcon /> */}
     </div>
   );

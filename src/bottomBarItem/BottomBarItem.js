@@ -69,8 +69,10 @@ const BottomBarItem = ({
           key={note.title}
           onClick={() => selectNote(note, index)}
           cols={2}
+          className={classes.titleStyle}
           // style={{ height: "auto" }}
         >
+          
           {/* cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}> */}
           {/* <img src={tile.img} alt={tile.title} /> */}
           {/* <div>{note.body}</div> */}
@@ -80,9 +82,11 @@ const BottomBarItem = ({
             // secondary={note.body}
           ></div>
           <GridListTileBar
+           
             title={note.title}
             titlePosition="top"
             cols={2}
+
             actionIcon={
               <IconButton
                 aria-label={`star ${note.title}`}

@@ -29,6 +29,16 @@ const styles = (theme) => ({
   editorContainer: {
     height: "100%",
     boxSizing: "border-box"
+  },
+  inputArea:{
+    // background:'rgb(225,0,0)',
+    // display:'grid',
+    display :'flex',
+    flexDirection:'column-reverse'
+
+    // gridTemplateColumns: '1fr 3fr'
+  
+
   }
 });
 

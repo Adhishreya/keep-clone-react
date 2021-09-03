@@ -12,7 +12,11 @@ const styles = (theme) => ({
     "&:hover": {
       color: "red"
     }
+  },
+  titleStyle:{
+    background:'red'
   }
+
 });
 
 export default styles;
