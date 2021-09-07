@@ -9,7 +9,6 @@ import {Menu,Search,Refresh,ViewStream,Apps,Settings, AccountCircle} from '@mate
 import { Typography ,AppBar,InputBase} from "@material-ui/core";
 const App = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
-
   const [selectNoteIndex, setNoteIndex] = useState(null);
   const [selectNote, setSelectNote] = useState(null);
   const [note, setNote] = useState(null);
@@ -26,7 +25,6 @@ const App = () => {
           data["id"] = doc.id;
           return data;
         });
-        // console.log(notes);
         setNote(notes);
       });
     // console.log(note);
@@ -35,18 +33,22 @@ const App = () => {
   function selectNotes(note, index) {
     setNoteIndex(index);
     setSelectNote(note);
-    // console.log(selectNote);
-    //when a note is selected , obtain its data and set the state
+    //select the note position from a list of notes and also store/obtain the note object.
   }
   const newNote = async (title) => {
+    //initially store the document even if the body is empty
     const notes = { title: title, body: "" };
+    console.log(title)
+    // if(title.length == 0)
+    // title = "Untitled"
     const newFromDB = await firebase.firestore().collection("notes").add({
       title: notes.title,
       body: notes.body,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
     const newId = newFromDB.id;
-    await setNote([...note, notes]);
+    // await
+     setNote([...note, notes]);
     const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);
     setNoteIndex(newNteINdex);
     setSelectNote(note[newNteINdex]);
@@ -88,7 +90,8 @@ const App = () => {
 
     <div className="app-container App">
       
-    <AppBar className={styles.containerBar}>
+    <AppBar className={styles.containerBar} >
+    <div className={styles.containerMain}>
     <Menu className={styles.hamburger}/>
     <img src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png" alt="KeepIcon" className={styles.image}/>
     <Typography color="textSecondary" className={styles.heading}>Keep</Typography>
@@ -112,7 +115,9 @@ const App = () => {
     <Settings className={styles.setting}/>
     <Apps className={styles.apps}/>
     <AccountCircle className={styles.account}/>
+    </div>
     </AppBar>
+    
       <div className={styles.contents}>
 
       

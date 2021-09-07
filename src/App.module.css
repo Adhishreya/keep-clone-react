@@ -1,9 +1,22 @@
 .containerBar
 {
     background-color: rgb(255, 255, 255)!important;
-    width: fit-content;
-    display: grid;
-    grid-template-columns: repeat(4,minmax(2rem,1fr));
+    /* width: fit-content; */
+    border-radius: 0.3rem;
+    margin-top: 0.5rem;   
+}
+.containerMain
+{
+    display: flex;
+    padding: 1rem;
+    /* display: grid;
+    
+    grid-template-columns: repeat(auto-fit,minmax(2rem,1fr)); */
+}
+.containerMain > *
+{
+    padding: 0.2rem;
+    margin: auto;
 }
 .image
 {
