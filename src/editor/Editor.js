@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ReactQuill from "react-quill";
 import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
@@ -18,6 +18,8 @@ const Editor = ({
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [id, setId] = useState("");
+  const inputReference = useRef(0);
+  const bodyReference = useRef(0);
 
 
   useEffect(() => {
@@ -52,7 +54,15 @@ const Editor = ({
   const submitNote = () =>
   {
     if(title!="" || body != "")
-    { newNote(title,body)}
+    { 
+      inputReference.current.value="";
+      bodyReference.current.value="";
+      newNote(title,body)
+      // setTitle("");
+      
+      setBody("");
+    }
+
   }
 useEffect (()=>{
 //   if(title=="" || body == "")
@@ -66,8 +76,8 @@ useEffect (()=>{
     <div className={classes.editorContainer}>
 
 <div className={classes.inputComponent}>
-        <input  className={classes.inputTitleComponent} onChange={(e)=>setTitle(e.target.value)} placeholder="title" type="text"/>
-        <textarea className={classes.inputNoteComponent} onChange={(e)=>setBody(e.target.value)} placeholder="Take a note ...."/>
+        <input ref={inputReference} value={inputReference.current.value} className={classes.inputTitleComponent} onChange={(e)=>setTitle(e.target.value)} placeholder="title" type="text"/>
+        <textarea ref={bodyReference} value={bodyReference.current.value} className={classes.inputNoteComponent} onChange={(e)=>setBody(e.target.value)} placeholder="Take a note ...."/>
       </div>
       <Button onClick={submitNote}>Submit Note</Button>
       {/* <div className={classes.inputComponent}>
