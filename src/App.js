@@ -103,15 +103,10 @@ const App = () => {
               <Typography color="textSecondary" className={styles.heading}>Keep</Typography>
 
               <div className={styles.search}>
-                  {/* <div > */}
                   <Search className={styles.searchIcon}/>
-                  {/* </div> */}
                   <InputBase
                   placeholder="Search…"
-                  // classes={{
-                  //   root: styles.inputRoot,
-                  //   input: styles.inputInput,
-                  // }}
+
                   className={styles.input}
                   inputProps={{ 'aria-label': 'search' }}
                   />
@@ -132,16 +127,14 @@ const App = () => {
                 note={note}
                 newNote={newNote}
                 noteUpdate={noteUpdate}//passing the note update function to child component
-              />
+        />
+        <BottomBar
+          selectNoteIndex={selectNoteIndex}
+          note={note}
+          selectNotes={selectNotes}
+          deleteNotes={deleteNotes}
 
-            {/* // ) :  } */}
-            <BottomBar
-              selectNoteIndex={selectNoteIndex}
-              note={note}
-              selectNotes={selectNotes}
-              deleteNotes={deleteNotes}
-              // newNote={newNote}
-            />
+        />
       </div>
     </div>
   );

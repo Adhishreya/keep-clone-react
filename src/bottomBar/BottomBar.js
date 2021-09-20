@@ -8,15 +8,25 @@ import BottomBarItem from "../bottomBarItem/BottomBarItem.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
+    // display: "flex",
+    display: "grid",
+    overflow:" hidden",
+    width: "80%",
+    margin: "auto",
+    /* flex-wrap: wrap; */
+    /* justify-content: space-around; */
+    // backgroundColor: "#fff",
+    gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
+    gridGap: "2rem",
+    // flexWrap: "wrap",
+    // justifyContent: "space-around",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper
   },
   gridList: {
-    width: 500,
-    height: 450
+    // width: 500,
+    width: "100%",
+    height: "100%"
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"
@@ -61,7 +71,27 @@ const BottomBar = ({
   return (
     <div className={classes.bottomBarComponent}>
       {note ? (
-        <div>
+        <div className={classes.barComponentMain}>
+          <div className={classes.root}>
+              {
+              note.map((n, index) => {
+              return (
+                      <div
+                      key={index}
+                      className={classes.gridList}
+                      >
+                      <BottomBarItem
+
+                      note={n}
+                      index={index}
+                      selectNoteIndex={selectNoteIndex}
+                      selectNote={selectNote}
+                      deleteNote={deleteNote}
+                      />
+                      </div>
+              );
+              })}
+          </div>
           {/* classes.sidebarContainer */}
 
 {/* 
@@ -71,7 +101,7 @@ const BottomBar = ({
 
 
           {/* {addnote ? ( */}
-            <div>
+            
                {/* <input class="ql-editor" data-gramm="false" contenteditable="true" onKeyUp={(e) => updateFile(e)} placeholder="title"/> */}
               {/* <input
                 type="text"
@@ -79,33 +109,13 @@ const BottomBar = ({
                 onKeyUp={(e) => updateFile(e)}
               /> */}
               {/* <Button onClick={submitNote}>Submit Note</Button> */}
-            </div>
+            
           {/* ) : null} */}
 
-          <div className={classes.root}>
-            {note.map((n, index) => {
-              // console.log(n)
-              return (
-                <div
-                  key={index}
-                  alignItems="flex-start"
-                  className={classes.gridList}
-                >
-                  <BottomBarItem
-                    
-                    note={n}
-                    index={index}
-                    selectNoteIndex={selectNoteIndex}
-                    selectNote={selectNote}
-                    deleteNote={deleteNote}
-                  />
-                </div>
-              );
-            })}
-          </div>
+          
         </div>
       ) : (
-        <div></div>
+        null
       )}
     </div>
   );

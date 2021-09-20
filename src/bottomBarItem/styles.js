@@ -14,7 +14,8 @@ const styles = (theme) => ({
     }
   },
   titleStyle:{
-    background:'red'
+    background:'red',
+    height:"4rem"
   },
   bottomBarItemComponent:{
     position:"absolute",

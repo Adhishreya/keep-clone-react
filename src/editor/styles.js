@@ -29,7 +29,7 @@ const styles = (theme) => ({
   editorContainer: {
     height: "100%",
     display:"flex",
-    flexDirection:"row", 
+    flexDirection:"column", 
     boxSizing: "border-box",
     position: "relative",
     // top: "5rem"
