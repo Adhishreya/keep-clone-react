@@ -59,7 +59,7 @@ const BottomBar = ({
     deleteNotes(note);
   };
   return (
-    <div>
+    <div className={classes.bottomBarComponent}>
       {note ? (
         <div>
           {/* classes.sidebarContainer */}

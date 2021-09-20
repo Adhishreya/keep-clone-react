@@ -37,7 +37,7 @@ const BottomBarItem = ({
   const classes = useStyles();
 
   return (
-    <div key={index}>
+    <div key={index} className={classes.bottomBarItemComponent}>
       <GridList 
         className={classes.gridList} 
         selected={selectNoteIndex === index}

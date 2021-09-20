@@ -29,8 +29,10 @@ const styles = (theme) => ({
   editorContainer: {
     height: "100%",
     display:"flex",
-    flexDirection:"column",
-    boxSizing: "border-box"
+    flexDirection:"row", 
+    boxSizing: "border-box",
+    position: "relative",
+    // top: "5rem"
   },
   inputArea:{
     // background:'rgb(225,0,0)',
@@ -42,11 +44,29 @@ const styles = (theme) => ({
   
 
   },
-  inputComponent:
-  {
-    background:"red",
-    width:"300px"
-  }
+  // inputComponent:
+  // {
+  //   background:"red",
+  //   width:"300px"
+  // }
+
+inputComponent:
+{
+    display: "flex",
+    flexDirection: "column",
+    margin: "auto",
+    /* align-items: center, */
+    /* justify-content: center, */
+    height: "fit-content",
+    backgroundColor: "antiquewhite",
+    width: "80%",
+    border: "2px solid rgb(168, 158, 156)"
+},
+// input:{
+//     border: none,
+// },
+inputNoteComponent:{height: "3rem", scrollBehavior: "smooth",overflowX: "hidden",border: "none"},
+inputTitleComponent:{height: "2rem",fontWeight: "700",border: "none"}
 });
 
 export default styles;

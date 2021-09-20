@@ -124,18 +124,14 @@ const App = () => {
     
         <div className={styles.contentsMain}>
 
-            {/* select a stored note and edit therefore to update the editor component the selected note index and the corresponding content must be populated */}
-            {selectNote ? (//displaying the editor componenent only when a note is selected from the list
               <Editor
-                selectedNote={selectNote}//passing the select note object
+                selectedNote={selectNote?selectNote:{id:null}}//passing the select note object
                 selectNoteIndex={selectNoteIndex}
                 note={note}
+                newNote={newNote}
                 noteUpdate={noteUpdate}//passing the note update function to child component
               />
-            ) :  <div className={styles.inputComponent}>
-        <input  className={styles.inputTitleComponent} placeholder="title" type="text"/>
-        <textarea className={styles.inputNoteComponent} placeholder="Take a note ...."/>
-      </div>}
+            {/* // ) :  } */}
             <BottomBar
               selectNoteIndex={selectNoteIndex}
               note={note}

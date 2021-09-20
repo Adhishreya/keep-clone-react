@@ -52,7 +52,15 @@ const styles = (theme) => ({
     backgroundColor: "#28787c",
     borderRadius: "0px",
     color: "white"
+  },
+  bottomBarComponent:
+  {
+    position:"absloute",
+    display:"flex",
+    flexDirection:"column",
+    top:"10rem"
   }
+
 });
 
 export default styles;

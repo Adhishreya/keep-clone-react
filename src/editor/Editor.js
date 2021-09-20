@@ -21,6 +21,7 @@ const Editor = ({
  //update the component with the contents of the selected note object
     setTitle(selectedNote.title);
     setText(selectedNote.body);
+    if(selectedNote.id)
     setId(selectedNote.id);
   }, [selectedNote.id]);
 
@@ -50,13 +51,18 @@ const Editor = ({
 
     noteUpdate(selectedNote.id, { title: title, body: text });
   }, 1500);
-  return (
+  return ( 
     <div className={classes.editorContainer}>
 
-      <div className={classes.inputComponent}>
+<div className={classes.inputComponent}>
+        <input  className={classes.inputTitleComponent} placeholder="title" type="text"/>
+        <textarea className={classes.inputNoteComponent} placeholder="Take a note ...."/>
+      </div>
+
+      {/* <div className={classes.inputComponent}>
         <input  className={classes.inputTitleComponent}   onChange={(e) =>   updateTitle(e)} value={title ? title : ""} placeholder="title" type="text"/>
         <textarea className={classes.inputNoteComponent} placeholder="Take a note ...." value={text} onChange={updateBody}  className={classes.inputArea}/>
-      </div>
+      </div> */}
 
       {/* <input
         type="text"
