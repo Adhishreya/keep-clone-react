@@ -46,11 +46,13 @@ const BottomBarItem = ({
   return (
     <div key={index} className={classes.bottomBarItemComponent}>
       <GridList 
+        onClick ={()=>console.log(note)}
+        onClick={() => selectNote(note, index)}
         className={classes.gridList} 
         selected={selectNoteIndex === index}
         alignItems="flex-start"
       >
-        {console.log(removeHTMLTags(note.body))}
+        {/* {console.log(removeHTMLTags(note.body))} */}
         {/* <div onClick={() => selectNote(note, index)}> */}
         {/* <ListItemText
             primary={note.title}

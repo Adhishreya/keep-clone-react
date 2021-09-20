@@ -44,7 +44,7 @@ const BottomBar = ({
   const updateFile = (e) => {
     // console.log("update file");
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
   const submitNote = () => {
     //pass the title of the new note to the app.js component nd set the current title to null 
@@ -84,6 +84,7 @@ const BottomBar = ({
 
           <div className={classes.root}>
             {note.map((n, index) => {
+              // console.log(n)
               return (
                 <div
                   key={index}
@@ -91,6 +92,7 @@ const BottomBar = ({
                   className={classes.gridList}
                 >
                   <BottomBarItem
+                    
                     note={n}
                     index={index}
                     selectNoteIndex={selectNoteIndex}

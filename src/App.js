@@ -38,7 +38,7 @@ const App = () => {
   const newNote = async (title,body) => {
     //initially store the document even if the body is empty
     const notes = { title: title, body: body };
-    console.log(title+" "+body)
+    // console.log(title+" "+body)
     if(title=="")
     title = "Untitled";
     if(body=="")
@@ -83,7 +83,7 @@ const App = () => {
     firebase.firestore().collection("notes").doc(not.id).delete();
   };
   function noteUpdate(index, noteObj) {
-    console.log(index);
+    // console.log(index);
     firebase.firestore().collection("notes").doc(index).update({
       title: noteObj.title,
       body: noteObj.body,
