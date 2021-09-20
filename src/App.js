@@ -54,8 +54,8 @@ const App = () => {
      setNote([...note, notes]);
     const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);//returns the note object of the currently added node (by filtering the notes array using the id of the newly added document)
 
-    setNoteIndex(newNteINdex);
-    setSelectNote(note[newNteINdex]);
+    // setNoteIndex(newNteINdex);
+    // setsSelectNote(note[newNteINdex]);
   };
 
   const deleteNotes = async (not) => {

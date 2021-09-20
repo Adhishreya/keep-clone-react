@@ -20,12 +20,16 @@ const Editor = ({
   const [id, setId] = useState("");
   const inputReference = useRef(0);
   const bodyReference = useRef(0);
+  const [save,setSave] = useState(true);
 
   useEffect(()=>{
     // console.log(selectedNote)
-    if(selectNoteIndex)
-    {inputReference.current.value=selectedNote.title;
-      bodyReference.current.value=selectedNote.body;}
+    if(selectNoteIndex !=null)
+    {
+      inputReference.current.value=selectedNote.title;
+      bodyReference.current.value=selectedNote.body;
+      setSave(false)
+    }
   },[selectNoteIndex])
 
   useEffect(() => {
@@ -63,8 +67,7 @@ const Editor = ({
     { 
       inputReference.current.value="";
       bodyReference.current.value="";
-      newNote(title,body)
-
+      newNote(title,body);
     }
   }
 useEffect (()=>{
@@ -82,7 +85,16 @@ useEffect (()=>{
         <input ref={inputReference} value={inputReference.current.value} className={classes.inputTitleComponent} onChange={(e)=>setTitle(e.target.value)} placeholder="title" type="text"/>
         <textarea ref={bodyReference} value={bodyReference.current.value} className={classes.inputNoteComponent} onChange={(e)=>setBody(e.target.value)} placeholder="Take a note ...."/>
       </div>
-      <Button onClick={submitNote}>Save Note</Button>
+      <Button onClick={()=>{
+        if(save)
+        {submitNote}
+        else
+        {
+          noteUpdate(selectedNote.id,{title:title,body:body});
+          inputReference.current.value="";
+          bodyReference.current.value="";
+        }
+        }}>Save Note</Button>
       {/* <div className={classes.inputComponent}>
         <input  className={classes.inputTitleComponent}   onChange={(e) =>   updateTitle(e)} value={title ? title : ""} placeholder="title" type="text"/>
         <textarea className={classes.inputNoteComponent} placeholder="Take a note ...." value={text} onChange={updateBody}  className={classes.inputArea}/>
