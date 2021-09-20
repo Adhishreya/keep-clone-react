@@ -20,6 +20,11 @@ const styles = (theme) => ({
     position:"absolute",
     top:"10rem"
 
+  },
+  titleGridBar:
+  {
+    width: "50%",
+    margin: "auto"
   }
 
 });

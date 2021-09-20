@@ -16,14 +16,21 @@ import { Delete } from "@material-ui/icons";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
+    // display: "flex",
+    // flexWrap: "wrap",
+    // justifyContent: "space-around",
+    // overflow: "hidden",
+    display: "grid",
+    overflow:" hidden",
+    /* flex-wrap: wrap; */
+    /* justify-content: space-around; */
+    backgroundColor: "#fff",
+    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+    gridGap: "1rem",
     backgroundColor: theme.palette.background.paper
   },
   gridList: {
-    width: 500,
+    width: "fit - content",
     height: "fit - content"
   }
 }));
@@ -83,6 +90,7 @@ const BottomBarItem = ({
             title={note.title}
             titlePosition="top"
             cols={2}
+            className={classes.titleGridBar}
 
             actionIcon={
               <IconButton
