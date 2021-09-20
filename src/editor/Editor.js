@@ -5,15 +5,18 @@ import styles from "./styles.js";
 import DeleteIcon from "@material-ui/icons/Delete";
 import BorderColorIcon from "@material-ui/icons/BorderColor";
 import { withStyles } from "@material-ui/core/styles";
+import { Button, List, Grid } from "@material-ui/core";
 const Editor = ({
   classes,
   selectedNote,
   selectNoteIndex,
   note,
+  newNote,
   noteUpdate
 }) => {
   const [text, setText] = useState("");
   const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
   const [id, setId] = useState("");
 
 
@@ -46,7 +49,15 @@ const Editor = ({
     //asynchronously keep updating state
   };
   //continuouly wait for user to stop typing for few seconds and immediately launch a http request to the firebase tore to save the text
-
+  const submitNote = () =>
+  {
+    if(title!="" || body != "")
+    { newNote(title,body)}
+  }
+useEffect (()=>{
+//   if(title=="" || body == "")
+//  { newNote(title,body)}
+},[title,body]);
   var c_update = debounce(() => {
 
     noteUpdate(selectedNote.id, { title: title, body: text });
@@ -55,10 +66,10 @@ const Editor = ({
     <div className={classes.editorContainer}>
 
 <div className={classes.inputComponent}>
-        <input  className={classes.inputTitleComponent} placeholder="title" type="text"/>
-        <textarea className={classes.inputNoteComponent} placeholder="Take a note ...."/>
+        <input  className={classes.inputTitleComponent} onChange={(e)=>setTitle(e.target.value)} placeholder="title" type="text"/>
+        <textarea className={classes.inputNoteComponent} onChange={(e)=>setBody(e.target.value)} placeholder="Take a note ...."/>
       </div>
-
+      <Button onClick={submitNote}>Submit Note</Button>
       {/* <div className={classes.inputComponent}>
         <input  className={classes.inputTitleComponent}   onChange={(e) =>   updateTitle(e)} value={title ? title : ""} placeholder="title" type="text"/>
         <textarea className={classes.inputNoteComponent} placeholder="Take a note ...." value={text} onChange={updateBody}  className={classes.inputArea}/>

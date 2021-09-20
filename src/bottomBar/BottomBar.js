@@ -78,7 +78,7 @@ const BottomBar = ({
                 placeholder="enter title"
                 onKeyUp={(e) => updateFile(e)}
               /> */}
-              <Button onClick={submitNote}>Submit Note</Button>
+              {/* <Button onClick={submitNote}>Submit Note</Button> */}
             </div>
           {/* ) : null} */}
 

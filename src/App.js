@@ -35,12 +35,14 @@ const App = () => {
     setSelectNote(note);
     //select the note position from a list of notes and also store/obtain the note object.
   }
-  const newNote = async (title) => {
+  const newNote = async (title,body) => {
     //initially store the document even if the body is empty
-    const notes = { title: title, body: "" };
-    console.log(title)
+    const notes = { title: title, body: body };
+    console.log(title+" "+body)
     if(title=="")
     title = "Untitled";
+    if(body=="")
+    body="";
     const newFromDB = await firebase.firestore().collection("notes").add({
       title: notes.title,
       body: notes.body,
@@ -123,21 +125,22 @@ const App = () => {
       </AppBar>
     
         <div className={styles.contentsMain}>
-
-              <Editor
+            
+        <Editor
                 selectedNote={selectNote?selectNote:{id:null}}//passing the select note object
                 selectNoteIndex={selectNoteIndex}
                 note={note}
                 newNote={newNote}
                 noteUpdate={noteUpdate}//passing the note update function to child component
               />
+
             {/* // ) :  } */}
             <BottomBar
               selectNoteIndex={selectNoteIndex}
               note={note}
               selectNotes={selectNotes}
               deleteNotes={deleteNotes}
-              newNote={newNote}
+              // newNote={newNote}
             />
       </div>
     </div>
