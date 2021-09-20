@@ -54,15 +54,22 @@ const Editor = ({
   return (
     <div className={classes.editorContainer}>
       {/* <BorderColorIcon></BorderColorIcon> */}
-      <input
+
+
+      <div className={classes.inputComponent}>
+        <input  className={classes.inputTitleComponent}   onChange={(e) =>   updateTitle(e)} value={title ? title : ""} placeholder="title" type="text"/>
+        <textarea className={classes.inputNoteComponent} placeholder="Take a note ...." value={text} onChange={updateBody}  className={classes.inputArea}/>
+      </div>
+
+      {/* <input
         type="text"
         style={{ color: "black" }}
         placeholder="Note title...."
         value={title ? title : ""}
-        onChange={(e) => updateTitle(e)}
-      />
+        onChange={(e) =>   updateTitle(e)}
+      /> */}
      
-      <ReactQuill value={text} onChange={updateBody}  className={classes.inputArea} placeholder="Take a nte..."/>
+      {/* <ReactQuill value={text} onChange={updateBody}  className={classes.inputArea} placeholder="Take a note..."/> */}
       
       {/* <DeleteIcon /> */}
     </div>

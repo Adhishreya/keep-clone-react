@@ -39,10 +39,8 @@ const BottomBarItem = ({
 
   return (
     <div key={index}>
-      <GridList
-        // style={{ height: "5rem" }}
-        className={classes.gridList}
-        // cellHeight={180}
+      <GridList 
+        className={classes.gridList} 
         selected={selectNoteIndex === index}
         alignItems="flex-start"
       >

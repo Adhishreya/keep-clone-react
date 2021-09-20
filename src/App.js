@@ -39,23 +39,26 @@ const App = () => {
     //initially store the document even if the body is empty
     const notes = { title: title, body: "" };
     console.log(title)
-    // if(title.length == 0)
-    // title = "Untitled"
+    if(title=="")
+    title = "Untitled";
     const newFromDB = await firebase.firestore().collection("notes").add({
       title: notes.title,
       body: notes.body,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     });
+    //get the id of the newly added note
     const newId = newFromDB.id;
-    // await
+    // obtain the newly added note and add to the current state
      setNote([...note, notes]);
-    const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);
+    const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);//returns the note object of the currently added node (by filtering the notes array using the id of the newly added document)
+
     setNoteIndex(newNteINdex);
     setSelectNote(note[newNteINdex]);
   };
 
   const deleteNotes = async (not) => {
-    await setNote(note.filter((n) => not != n));
+    // await
+     setNote(note.filter((n) => not != n));//altering the note value by removing the passed note object from the list
     const delIndex = note.indexOf(not);
     if (delIndex == selectNoteIndex) {
       setSelectNote(null);
@@ -83,60 +86,64 @@ const App = () => {
       title: noteObj.title,
       body: noteObj.body,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      //update the note by obtaining the title and the corresponding body of the note from the user and updating the timetamp 
     });
   }
   // const deleteNotes = () => {};
   return (
 
-    <div className="app-container App">
-      
-    <AppBar className={styles.containerBar} >
-    <div className={styles.containerMain}>
-    <Menu className={styles.hamburger}/>
-    <img src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png" alt="KeepIcon" className={styles.image}/>
-    <Typography color="textSecondary" className={styles.heading}>Keep</Typography>
+    // <div className="app-container App">
+      <div className={styles.appContainer}>
+      <AppBar className={styles.containerBar} >
+          <div className={styles.containerMain}>
+              <Menu className={styles.hamburger}/>
+              <img src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png" alt="KeepIcon" className={styles.image}/>
+              <Typography color="textSecondary" className={styles.heading}>Keep</Typography>
 
-    <div className={styles.search}>
-            {/* <div > */}
-              <Search className={styles.searchIcon}/>
-            {/* </div> */}
-            <InputBase
-              placeholder="Search…"
-              // classes={{
-              //   root: styles.inputRoot,
-              //   input: styles.inputInput,
-              // }}
-              className={styles.input}
-              inputProps={{ 'aria-label': 'search' }}
-            />
+              <div className={styles.search}>
+                  {/* <div > */}
+                  <Search className={styles.searchIcon}/>
+                  {/* </div> */}
+                  <InputBase
+                  placeholder="Search…"
+                  // classes={{
+                  //   root: styles.inputRoot,
+                  //   input: styles.inputInput,
+                  // }}
+                  className={styles.input}
+                  inputProps={{ 'aria-label': 'search' }}
+                  />
+              </div>
+              <Refresh className={styles.refresh}/>
+              {listVew ? <ViewStream className={styles.view} onClick={()=>{setListView(false)}}/> : <App/>}
+              <Settings className={styles.setting}/>
+              <Apps className={styles.apps}/>
+              <AccountCircle className={styles.account}/>
           </div>
-    <Refresh className={styles.refresh}/>
-    {listVew ? <ViewStream className={styles.view} onClick={()=>{setListView(false)}}/> : <App/>}
-    <Settings className={styles.setting}/>
-    <Apps className={styles.apps}/>
-    <AccountCircle className={styles.account}/>
-    </div>
-    </AppBar>
+      </AppBar>
     
-      <div className={styles.contents}>
+        <div className={styles.contentsMain}>
 
-      
-      {selectNote ? (
-        <Editor
-          selectedNote={selectNote}
-          selectNoteIndex={selectNoteIndex}
-          note={note}
-          noteUpdate={noteUpdate}
-        />
-      ) : null}
-      <BottomBar
-        selectNoteIndex={selectNoteIndex}
-        note={note}
-        selectNotes={selectNotes}
-        deleteNotes={deleteNotes}
-        newNote={newNote}
-      />
-    </div>
+            {/* select a stored note and edit therefore to update the editor component the selected note index and the corresponding content must be populated */}
+            {selectNote ? (//displaying the editor componenent only when a note is selected from the list
+              <Editor
+                selectedNote={selectNote}//passing the select note object
+                selectNoteIndex={selectNoteIndex}
+                note={note}
+                noteUpdate={noteUpdate}//passing the note update function to child component
+              />
+            ) :  <div className={styles.inputComponent}>
+        <input  className={styles.inputTitleComponent} placeholder="title" type="text"/>
+        <textarea className={styles.inputNoteComponent} placeholder="Take a note ...."/>
+      </div>}
+            <BottomBar
+              selectNoteIndex={selectNoteIndex}
+              note={note}
+              selectNotes={selectNotes}
+              deleteNotes={deleteNotes}
+              newNote={newNote}
+            />
+      </div>
     </div>
   );
   

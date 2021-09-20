@@ -75,7 +75,7 @@ const BottomBar = ({
 
           {/* {addnote ? ( */}
             <div>
-               <input class="ql-editor" data-gramm="false" contenteditable="true" onKeyUp={(e) => updateFile(e)} placeholder="title"/>
+               {/* <input class="ql-editor" data-gramm="false" contenteditable="true" onKeyUp={(e) => updateFile(e)} placeholder="title"/> */}
               {/* <input
                 type="text"
                 placeholder="enter title"

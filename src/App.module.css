@@ -1,3 +1,10 @@
+.appContainer
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
 .containerBar
 {
     background-color: rgb(255, 255, 255)!important;
@@ -62,9 +69,11 @@
     align-items: 'center';
     justify-content: 'center';
   }
-  .contents
+  .contentsMain
 {
-  margin-top: 50%;
+  /* margin-top: 50%; */
+  position: relative;
+  top:20%
 }
 .refresh
 {
@@ -84,3 +93,21 @@
 {
     width: fit-content;
 }
+.inputComponent
+{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: fit-content;
+    background-color: antiquewhite;
+    width: 80%;
+    border: 2px solid rgb(168, 158, 156);
+}
+.inputComponent > *
+{
+    border: none;
+}
+.inputNoteComponent{height: 3rem; scroll-behavior: smooth;overflow-x: hidden;}
+.inputTitleComponent{height: 2rem;font-weight: 700;}

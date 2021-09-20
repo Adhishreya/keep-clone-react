@@ -28,6 +28,8 @@ const styles = (theme) => ({
   },
   editorContainer: {
     height: "100%",
+    display:"flex",
+    flexDirection:"column",
     boxSizing: "border-box"
   },
   inputArea:{
@@ -39,6 +41,11 @@ const styles = (theme) => ({
     // gridTemplateColumns: '1fr 3fr'
   
 
+  },
+  inputComponent:
+  {
+    background:"red",
+    width:"300px"
   }
 });
 
