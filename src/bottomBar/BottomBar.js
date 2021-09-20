@@ -47,18 +47,15 @@ const BottomBar = ({
     console.log(title);
   };
   const submitNote = () => {
-    // console.log("submit file");
+    //pass the title of the new note to the app.js component nd set the current title to null 
     newNote(title);
     setTitle("");
     setAddNote(false);
   };
   const selectNote = (note, index) => {
-    // console.log("select note");
     selectNotes(note, index);
-    // console.log(note, index);
   };
   const deleteNote = (note) => {
-    // console.log("delete note");
     deleteNotes(note);
   };
   return (
