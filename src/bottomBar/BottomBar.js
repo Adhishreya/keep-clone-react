@@ -8,15 +8,25 @@ import BottomBarItem from "../bottomBarItem/BottomBarItem.js";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
+    // display: "flex",
+    display: "grid",
+    overflow:" hidden",
+    width: "80%",
+    margin: "auto",
+    /* flex-wrap: wrap; */
+    /* justify-content: space-around; */
+    // backgroundColor: "#fff",
+    gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
+    gridGap: "2rem",
+    // flexWrap: "wrap",
+    // justifyContent: "space-around",
     overflow: "hidden",
     backgroundColor: theme.palette.background.paper
   },
   gridList: {
-    width: 500,
-    height: 450
+    // width: 500,
+    width: "100%",
+    height: "100%"
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"
@@ -44,64 +54,68 @@ const BottomBar = ({
   const updateFile = (e) => {
     // console.log("update file");
     setTitle(e.target.value);
-    console.log(title);
+    // console.log(title);
   };
   const submitNote = () => {
-    // console.log("submit file");
+    //pass the title of the new note to the app.js component nd set the current title to null 
     newNote(title);
     setTitle("");
     setAddNote(false);
   };
   const selectNote = (note, index) => {
-    // console.log("select note");
     selectNotes(note, index);
-    // console.log(note, index);
   };
   const deleteNote = (note) => {
-    // console.log("delete note");
     deleteNotes(note);
   };
   return (
-    <div>
+    <div className={classes.bottomBarComponent}>
       {note ? (
-        <div>
+        <div className={classes.barComponentMain}>
+          <div className={classes.root}>
+              {
+              note.map((n, index) => {
+              return (
+                      <div
+                      key={index}
+                      className={classes.gridList}
+                      >
+                      <BottomBarItem
+
+                      note={n}
+                      index={index}
+                      selectNoteIndex={selectNoteIndex}
+                      selectNote={selectNote}
+                      deleteNote={deleteNote}
+                      />
+                      </div>
+              );
+              })}
+          </div>
           {/* classes.sidebarContainer */}
+
+{/* 
           <Button className={classes.newNoteBtn} onClick={(e) => btnClick(e)}>
             {addnote ? "Cancel" : "New Note"}
-          </Button>
-          {addnote ? (
-            <div>
-              <input
+          </Button> */}
+
+
+          {/* {addnote ? ( */}
+            
+               {/* <input class="ql-editor" data-gramm="false" contenteditable="true" onKeyUp={(e) => updateFile(e)} placeholder="title"/> */}
+              {/* <input
                 type="text"
                 placeholder="enter title"
                 onKeyUp={(e) => updateFile(e)}
-              />
-              <Button onClick={submitNote}>Submit Note</Button>
-            </div>
-          ) : null}
+              /> */}
+              {/* <Button onClick={submitNote}>Submit Note</Button> */}
+            
+          {/* ) : null} */}
 
-          <div className={classes.root}>
-            {note.map((n, index) => {
-              return (
-                <div
-                  key={index}
-                  alignItems="flex-start"
-                  className={classes.gridList}
-                >
-                  <BottomBarItem
-                    note={n}
-                    index={index}
-                    selectNoteIndex={selectNoteIndex}
-                    selectNote={selectNote}
-                    deleteNote={deleteNote}
-                  />
-                </div>
-              );
-            })}
-          </div>
+          
         </div>
       ) : (
-        <div></div>
+        null
       )}
     </div>
   );

@@ -12,7 +12,22 @@ const styles = (theme) => ({
     "&:hover": {
       color: "red"
     }
+  },
+  titleStyle:{
+    background:'red',
+    height:"4rem"
+  },
+  bottomBarItemComponent:{
+    position:"absolute",
+    top:"10rem"
+
+  },
+  titleGridBar:
+  {
+    width: "50%",
+    margin: "auto"
   }
+
 });
 
 export default styles;

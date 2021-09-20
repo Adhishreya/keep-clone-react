@@ -28,8 +28,45 @@ const styles = (theme) => ({
   },
   editorContainer: {
     height: "100%",
-    boxSizing: "border-box"
-  }
+    display:"flex",
+    flexDirection:"column", 
+    boxSizing: "border-box",
+    position: "relative",
+    // top: "5rem"
+  },
+  inputArea:{
+    // background:'rgb(225,0,0)',
+    // display:'grid',
+    display :'flex',
+    flexDirection:'column-reverse'
+
+    // gridTemplateColumns: '1fr 3fr'
+  
+
+  },
+  // inputComponent:
+  // {
+  //   background:"red",
+  //   width:"300px"
+  // }
+
+inputComponent:
+{
+    display: "flex",
+    flexDirection: "column",
+    margin: "auto",
+    /* align-items: center, */
+    /* justify-content: center, */
+    height: "fit-content",
+    backgroundColor: "antiquewhite",
+    width: "80%",
+    border: "2px solid rgb(168, 158, 156)"
+},
+// input:{
+//     border: none,
+// },
+inputNoteComponent:{height: "3rem", scrollBehavior: "smooth",overflowX: "hidden",border: "none"},
+inputTitleComponent:{height: "2rem",fontWeight: "700",border: "none"}
 });
 
 export default styles;

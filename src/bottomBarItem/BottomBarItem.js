@@ -16,18 +16,26 @@ import { Delete } from "@material-ui/icons";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
+    display: "grid",
+    overflow:" hidden",
+    height:"4rem !important",
+    backgroundColor: "#fff",
+    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+    gridGap: "1rem",
     backgroundColor: theme.palette.background.paper
   },
   gridList: {
-    width: 500,
-    // height: 450
+    width: "fit - content",
     height: "fit - content"
   }
 }));
+var gridStyle =
+{
+    overflow:" hidden",
+    height:"4rem",
+    backgroundColor: "white",
+    border:"2px solid #fff"
+}
 const BottomBarItem = ({
   note,
   index,
@@ -38,51 +46,34 @@ const BottomBarItem = ({
   const classes = useStyles();
 
   return (
-    <div key={index}>
-      <GridList
-        // style={{ height: "5rem" }}
-        className={classes.gridList}
-        // cellHeight={180}
+    <div key={index} className={classes.bottomBarItemComponent}>
+      <GridList 
+       style={gridStyle}
+        onClick={() => selectNote(note, index)}
+        className={classes.gridListMain} 
         selected={selectNoteIndex === index}
-        alignItems="flex-start"
       >
-        {console.log(removeHTMLTags(note.body))}
-        {/* <div onClick={() => selectNote(note, index)}> */}
-        {/* <ListItemText
-            primary={note.title}
-            secondary={removeHTMLTags(note.body.substring(0, 10) + "....")}
-            // secondary={note.body}
-          ></ListItemText>
-        </div>
-        <Delete
-          onClick={() => {
-            if (
-              window.confirm(
-                `Are you sure you want to delete this note? ${note.title}`
-              )
-            )
-              deleteNote(note, index);
-          }}
-        ></Delete> */}
-
         <GridListTile
+         style={gridStyle}
           key={note.title}
           onClick={() => selectNote(note, index)}
           cols={2}
+          className={classes.titleStyle}
           // style={{ height: "auto" }}
         >
+          
           {/* cols={tile.featured ? 2 : 1} rows={tile.featured ? 2 : 1}> */}
           {/* <img src={tile.img} alt={tile.title} /> */}
           {/* <div>{note.body}</div> */}
-          <div
-            // primary={note.title}
-            secondary={removeHTMLTags(note.body.substring(0, 10) + "....")}
-            // secondary={note.body}
-          ></div>
+         
           <GridListTileBar
+           style={gridStyle}
             title={note.title}
             titlePosition="top"
             cols={2}
+            style={{height:"2rem"}}
+            className={classes.titleGridBar}
+
             actionIcon={
               <IconButton
                 aria-label={`star ${note.title}`}
@@ -105,6 +96,9 @@ const BottomBarItem = ({
           />
         </GridListTile>
       </GridList>
+      <div>
+        {removeHTMLTags(note.body.substring(0, 20) + "....")}
+      </div>
     </div>
   );
 };
