@@ -21,6 +21,12 @@ const Editor = ({
   const inputReference = useRef(0);
   const bodyReference = useRef(0);
 
+  useEffect(()=>{
+    // console.log(selectedNote)
+    if(selectNoteIndex)
+    {inputReference.current.value=selectedNote.title;
+      bodyReference.current.value=selectedNote.body;}
+  },[selectNoteIndex])
 
   useEffect(() => {
  //update the component with the contents of the selected note object

@@ -46,7 +46,7 @@ const BottomBarItem = ({
   return (
     <div key={index} className={classes.bottomBarItemComponent}>
       <GridList 
-        onClick ={()=>console.log(note)}
+        // onClick ={()=>console.log(note)}
         onClick={() => selectNote(note, index)}
         className={classes.gridList} 
         selected={selectNoteIndex === index}
