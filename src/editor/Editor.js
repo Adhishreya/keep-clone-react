@@ -16,19 +16,19 @@ const Editor = ({
   const [title, setTitle] = useState("");
   const [id, setId] = useState("");
 
-  // useEffect(()=>{
-  // // update()
-  // },[text])
-  // console.log(selectedNote);
+
   useEffect(() => {
-    // console.log(selectedNote);
+ //update the component with the contents of the selected note object
     setTitle(selectedNote.title);
     setText(selectedNote.body);
     setId(selectedNote.id);
   }, [selectedNote.id]);
+
+
   const updateBody = (val) => {
     async function change(vals) {
-      await setText(vals);
+      // await 
+      setText(vals);
       c_update();
     }
     change(val);
@@ -38,7 +38,7 @@ const Editor = ({
 
   const updateTitle = (e) => {
     async function change(e) {
-      await setTitle(e.target.value);
+      setTitle(e.target.value);
       c_update();
     }
     change(e);
@@ -47,14 +47,11 @@ const Editor = ({
   //continuouly wait for user to stop typing for few seconds and immediately launch a http request to the firebase tore to save the text
 
   var c_update = debounce(() => {
-    // console.log("updating");
 
     noteUpdate(selectedNote.id, { title: title, body: text });
   }, 1500);
   return (
     <div className={classes.editorContainer}>
-      {/* <BorderColorIcon></BorderColorIcon> */}
-
 
       <div className={classes.inputComponent}>
         <input  className={classes.inputTitleComponent}   onChange={(e) =>   updateTitle(e)} value={title ? title : ""} placeholder="title" type="text"/>
