@@ -6,7 +6,6 @@ import BottomBar from "./bottomBar/BottomBar.js";
 import firebase from "firebase";
 import styles from './App.module.css';
 import {Menu,Search,Refresh,ViewStream,Apps,Settings, AccountCircle,Brightness4,Brightness7} from '@material-ui/icons';
-// import GridViewIcon from '@mui/icons-material/GridView';
 import { Typography ,AppBar,InputBase} from "@material-ui/core";
 const App = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
@@ -15,7 +14,20 @@ const App = () => {
   const [note, setNote] = useState(null);
   const [listVew,setListView] = useState(true);
   const [light,setLight] = useState(true);
+  const [searchResult,setSearchResult] = useState([]);
+  const [searchValue,setSearchValue] = useState("")
   const collection = "notes";
+
+  useEffect(()=>{
+    if(note!=null)
+  {  const results = note.filter((e,i)=>{
+        return e.title.toLowerCase().includes(searchValue.toLowerCase())|| e.body.toLowerCase().includes(searchValue.toLowerCase());
+    });
+
+    setSearchResult(results);
+    // console.log(searchResult)
+  }
+  },[searchValue])
   useEffect(() => {
     firebase
       .firestore()
@@ -142,10 +154,10 @@ const App = () => {
               <Typography color="textSecondary" className={styles.heading}>Keep</Typography>
 
               <div className={styles.search}>
-                  <Search className={styles.searchIcon}/>
+                  <Search className={styles.searchIcon} />
                   <InputBase
                   placeholder="Search…"
-
+                  onChange={e=>setSearchValue(e.target.value)}
                   className={styles.input}
                   inputProps={{ 'aria-label': 'search' }}
                   />
@@ -170,11 +182,10 @@ const App = () => {
         />
         <BottomBar
           selectNoteIndex={selectNoteIndex}
-          note={note}
+          note={searchValue?searchResult:note}
           selectNotes={selectNotes}
           deleteNotes={deleteNotes}
           listVew={listVew}
-
         />
       </div>
     </div>

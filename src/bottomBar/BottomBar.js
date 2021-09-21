@@ -56,7 +56,7 @@ const BottomBar = ({
   const [display,setDisplay] = useState(false);
 
   useEffect(()=>{
-    console.log(localStorage.getItem('list'))
+    // console.log(localStorage.getItem('list'))
     if(localStorage.getItem('list')=='true')
     {
       setDisplay(true);
@@ -66,7 +66,7 @@ const BottomBar = ({
     setDisplay(false)
   },[localStorage.getItem('list')]);
   const btnClick = (e) => {
-    console.log("new btn clicked");
+    // console.log("new btn clicked");
     setAddNote(!addnote);
   };
   // const updateFile = (e) => {
@@ -84,6 +84,9 @@ const BottomBar = ({
   const deleteNote = (note) => {
     deleteNotes(note);
   };
+  useEffect(()=>{
+    console.log(note)
+  },[note])
   return (
     <div className={classes.bottomBarComponent}>
       {note ? (

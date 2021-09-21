@@ -21,7 +21,7 @@ const Editor = ({
   const [save,setSave] = useState(true);
 
   useEffect(()=>{
-    console.log(selectNoteIndex)
+    // console.log(selectNoteIndex)
     if(selectNoteIndex !=null)
     {
       inputReference.current.value=selectedNote.title;
@@ -74,7 +74,7 @@ const Editor = ({
       if(body==""||body==null)
     {setBody("");}
       newNote(title,body);
-      console.log(inputReference.current);
+      // console.log(inputReference.current);
       setTitle(inputReference.current.value);
       setBody(inputReference.current.value);
     
