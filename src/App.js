@@ -19,7 +19,7 @@ const App = () => {
   const collection = "notes";
 
   useEffect(()=>{
-    if(note!=null)
+    if(note!=null&&searchValue!=null)
   {  const results = note.filter((e,i)=>{
         return e.title.toLowerCase().includes(searchValue.toLowerCase())|| e.body.toLowerCase().includes(searchValue.toLowerCase());
     });
@@ -148,6 +148,7 @@ const App = () => {
     setSelectNote(null);
     setNoteIndex(null);
     setSearchValue(null);
+    setSearchResult(null);
   }
   return (
 
