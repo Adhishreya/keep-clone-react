@@ -1,14 +1,25 @@
 :root
 {
     --var-primary-bg:white;
-    --var-primary-color:black;
+    --var-primary-color:#6e6767;
 }
-.appContainer
+.appContainerLight
 {
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
     display: flex;
     flex-direction: column;
+    background: var(--var-primary-bg);
+    color: var(--var-primary-color);
+}
+.appContainerDark
+{
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--var-primary-color);
+    color: var(--var-primary-bg);
 }
 .containerBar
 {
@@ -79,9 +90,11 @@
   .contentsMain
 {
   /* margin-top: 50%; */
-  position: relative;
-  position: relative;
+  /* position: relative; */
+  /* position: relative; */
     top: 21%;
+    position: absolute;
+
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -5,7 +5,7 @@ import Editor from "./editor/Editor.js";
 import BottomBar from "./bottomBar/BottomBar.js";
 import firebase from "firebase";
 import styles from './App.module.css';
-import {Menu,Search,Refresh,ViewStream,Apps,Settings, AccountCircle} from '@material-ui/icons';
+import {Menu,Search,Refresh,ViewStream,Apps,Settings, AccountCircle,Brightness4,Brightness7} from '@material-ui/icons';
 // import GridViewIcon from '@mui/icons-material/GridView';
 import { Typography ,AppBar,InputBase} from "@material-ui/core";
 const App = () => {
@@ -14,6 +14,7 @@ const App = () => {
   const [selectNote, setSelectNote] = useState(null);
   const [note, setNote] = useState(null);
   const [listVew,setListView] = useState(true);
+  const [light,setLight] = useState(true);
   const collection = "notes";
   useEffect(() => {
     firebase
@@ -100,24 +101,40 @@ const App = () => {
     setSelectNote(null);
         setNoteIndex(null);
   }
+  // useEffect(()=>{
+  //   console.log(localStorage.getItem('theme'))
+  //   if(localStorage.getItem('theme')=='true')
+  //   {
+  //     setDisplay(true);
+  //   }
 
+  //   else
+  //   setDisplay(false)
+  // },[localStorage.getItem('theme')]);
   const viewStyle = () =>{
     if(listVew)
     localStorage.setItem('list',true)
     else
     localStorage.setItem('list',false)
   }
+  const viewTheme = () =>{
+    if(listVew)
+    localStorage.setItem('theme',true)
+    else
+    localStorage.setItem('theme',false)
+  }
   const refresh = () =>{
     console.log("refreshed")
     //clear all the currently cached data
     setListView(true)
     localStorage.removeItem('list');
+    localStorage.removeItem('theme');
     setSelectNote(null);
     setNoteIndex(null)
   }
   return (
 
-      <div className={styles.appContainer}>
+      <div className={light ? styles.appContainerLight : styles.appContainerDark}>
       <AppBar className={styles.containerBar} >
           <div className={styles.containerMain}>
               {/* <Menu className={styles.hamburger}/> */}
@@ -135,7 +152,8 @@ const App = () => {
               </div>
               <Refresh className={styles.refresh} onClick={()=>refresh()}/>
             {listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>}
-              <Settings className={styles.setting}/>
+              {/* <Settings className={styles.setting}/> */}
+              {light?<Brightness4 className={styles.setting} onClick={()=>{setLight(false);viewTheme();}}/>:<Brightness7 className={styles.setting} onClick={()=>{setLight(true);viewTheme();}}/>}
               {/* <Apps className={styles.apps}/> */}
               <AccountCircle className={styles.account}/>
           </div>
