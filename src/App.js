@@ -74,18 +74,22 @@ const App = () => {
   const deleteNotes = async (not) => {
     // await
      setNote(note.filter((n) => not != n));//altering the note value by removing the passed note object from the list
+     if(searchResult)
+     setSearchResult(searchResult.filter((n) => not != n))
     const delIndex = note.indexOf(not);
     
     if (delIndex === selectNoteIndex) {
      
       setSelectNote(null);
       setNoteIndex(null);
+      setSearchResult(null);
       // console.log(delIndex+" "+selectNoteIndex);
     } else {
       if (note.length > 1) {
         selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1);
       } else {
         setSelectNote(null);
+        setSearchResult(null)
         setNoteIndex(null);
       }
 
@@ -142,7 +146,8 @@ const App = () => {
     localStorage.removeItem('list');
     localStorage.removeItem('theme');
     setSelectNote(null);
-    setNoteIndex(null)
+    setNoteIndex(null);
+    setSearchValue(null);
   }
   return (
 
