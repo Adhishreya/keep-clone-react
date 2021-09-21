@@ -107,6 +107,14 @@ const App = () => {
     else
     localStorage.setItem('list',false)
   }
+  const refresh = () =>{
+    console.log("refreshed")
+    //clear all the currently cached data
+    setListView(true)
+    localStorage.removeItem('list');
+    setSelectNote(null);
+    setNoteIndex(null)
+  }
   return (
 
       <div className={styles.appContainer}>
@@ -125,7 +133,7 @@ const App = () => {
                   inputProps={{ 'aria-label': 'search' }}
                   />
               </div>
-              <Refresh className={styles.refresh}/>
+              <Refresh className={styles.refresh} onClick={()=>refresh()}/>
             {listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>}
               <Settings className={styles.setting}/>
               {/* <Apps className={styles.apps}/> */}
