@@ -120,7 +120,7 @@ const App = () => {
       <div className={styles.appContainer}>
       <AppBar className={styles.containerBar} >
           <div className={styles.containerMain}>
-              <Menu className={styles.hamburger}/>
+              {/* <Menu className={styles.hamburger}/> */}
               <img src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png" alt="KeepIcon" className={styles.image}/>
               <Typography color="textSecondary" className={styles.heading}>Keep</Typography>
 
