@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import ReactQuill from "react-quill";
 import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
 import DeleteIcon from "@material-ui/icons/Delete";
@@ -11,6 +10,7 @@ const Editor = ({
   selectedNote,
   selectNoteIndex,
   note,
+  selectNotes,
   newNote,
   noteUpdate
 }) => {
@@ -18,8 +18,8 @@ const Editor = ({
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [id, setId] = useState("");
-  const inputReference = useRef(0);
-  const bodyReference = useRef(0);
+  const inputReference = useRef(null);
+  const bodyReference = useRef(null);
   const [save,setSave] = useState(true);
 
   useEffect(()=>{
@@ -28,7 +28,7 @@ const Editor = ({
     {
       inputReference.current.value=selectedNote.title;
       bodyReference.current.value=selectedNote.body;
-      setSave(false)
+      setSave(false); 
     }
   },[selectNoteIndex])
 
@@ -63,12 +63,25 @@ const Editor = ({
   //continuouly wait for user to stop typing for few seconds and immediately launch a http request to the firebase tore to save the text
   const submitNote = () =>
   {
-    if(title!="" || body != "")
-    { 
+    // if(title!="" || body != ""||body==null||title==null)
+    // { 
+      // console.lo
       inputReference.current.value="";
       bodyReference.current.value="";
+      if(title==""||title==null)
+      {setTitle("Untitled");}
+
+      if(body==""||body==null)
+    {setBody("");}
       newNote(title,body);
-    }
+      console.log(inputReference.current);
+      setTitle(inputReference.current.value);
+      setBody(inputReference.current.value);
+      // setSave(false);
+      // selectNotes(null,null);
+      // selectNoteIndex(null);
+      // setselectedNote(null)
+    // }
   }
 useEffect (()=>{
 //   if(title=="" || body == "")
@@ -82,17 +95,19 @@ useEffect (()=>{
     <div className={classes.editorContainer}>
 
 <div className={classes.inputComponent}>
-        <input ref={inputReference} value={inputReference.current.value} className={classes.inputTitleComponent} onChange={(e)=>setTitle(e.target.value)} placeholder="title" type="text"/>
-        <textarea ref={bodyReference} value={bodyReference.current.value} className={classes.inputNoteComponent} onChange={(e)=>setBody(e.target.value)} placeholder="Take a note ...."/>
+        <input ref={inputReference} value={null} className={classes.inputTitleComponent} onChange={(e)=>setTitle(e.target.value)} placeholder="title" type="text"/>
+        <textarea ref={bodyReference} value={null} className={classes.inputNoteComponent} onChange={(e)=>setBody(e.target.value)} placeholder="Take a note ...."/>
       </div>
       <Button onClick={()=>{
+        // console.log(save)
         if(save)
-        {submitNote}
+        {submitNote()}
         else
         {
           noteUpdate(selectedNote.id,{title:title,body:body});
           inputReference.current.value="";
           bodyReference.current.value="";
+          setSave(true);
         }
         }}>Save Note</Button>
       {/* <div className={classes.inputComponent}>
@@ -108,7 +123,7 @@ useEffect (()=>{
         onChange={(e) =>   updateTitle(e)}
       /> */}
      
-      {/* <ReactQuill value={text} onChange={updateBody}  className={classes.inputArea} placeholder="Take a note..."/> */}
+     
       
       {/* <DeleteIcon /> */}
     </div>

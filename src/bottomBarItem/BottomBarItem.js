@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
+import React,{ useState, useEffect } from "react";
 import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
 import { removeHTMLTags } from "../helper/debounce.js";

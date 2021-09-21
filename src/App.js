@@ -12,7 +12,7 @@ const App = () => {
   const [selectNoteIndex, setNoteIndex] = useState(null);
   const [selectNote, setSelectNote] = useState(null);
   const [note, setNote] = useState(null);
-  const [listVew,setListView] = useState(true);
+  const [listVew,setListView] = useState(false);
   const collection = "notes";
   useEffect(() => {
     firebase
@@ -37,12 +37,13 @@ const App = () => {
   }
   const newNote = async (title,body) => {
     //initially store the document even if the body is empty
+    if(title==""||title==null)
+    {title = "Untitled";}
+    if(body==""||body==null)
+    body="";
     const notes = { title: title, body: body };
     // console.log(title+" "+body)
-    if(title=="")
-    title = "Untitled";
-    if(body=="")
-    body="";
+
     const newFromDB = await firebase.firestore().collection("notes").add({
       title: notes.title,
       body: notes.body,
@@ -52,10 +53,10 @@ const App = () => {
     const newId = newFromDB.id;
     // obtain the newly added note and add to the current state
      setNote([...note, notes]);
-    const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);//returns the note object of the currently added node (by filtering the notes array using the id of the newly added document)
+    // const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);//returns the note object of the currently added node (by filtering the notes array using the id of the newly added document)
 
-    // setNoteIndex(newNteINdex);
-    // setsSelectNote(note[newNteINdex]);
+    setNoteIndex(null);
+    setSelectNote(null);
   };
 
   const deleteNotes = async (not) => {
@@ -90,6 +91,8 @@ const App = () => {
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
       //update the note by obtaining the title and the corresponding body of the note from the user and updating the timetamp 
     });
+    setSelectNote(null);
+        setNoteIndex(null);
   }
   // const deleteNotes = () => {};
   return (
@@ -112,7 +115,7 @@ const App = () => {
                   />
               </div>
               <Refresh className={styles.refresh}/>
-              {listVew ? <ViewStream className={styles.view} onClick={()=>{setListView(false)}}/> : <App/>}
+              {/* {listVew ? <ViewStream className={styles.view} onClick={()=>{setListView(false)}}/> : <App/>} */}
               <Settings className={styles.setting}/>
               <Apps className={styles.apps}/>
               <AccountCircle className={styles.account}/>
@@ -133,6 +136,7 @@ const App = () => {
           note={note}
           selectNotes={selectNotes}
           deleteNotes={deleteNotes}
+          listVew={listVew}
 
         />
       </div>
