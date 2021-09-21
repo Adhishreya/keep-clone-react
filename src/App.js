@@ -85,6 +85,10 @@ const App = () => {
   };
   function noteUpdate(index, noteObj) {
     // console.log(index);
+    if(noteObj.title==""||noteObj.title==null)
+    {noteObj.title = "Untitled";}
+    if(noteObj.body==""||noteObj.body==null)
+    noteObj.body="";
     firebase.firestore().collection("notes").doc(index).update({
       title: noteObj.title,
       body: noteObj.body,
