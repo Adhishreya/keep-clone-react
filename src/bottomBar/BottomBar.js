@@ -6,7 +6,8 @@ import { withStyles, makeStyles } from "@material-ui/core/styles";
 import BottomBarItem from "../bottomBarItem/BottomBarItem.js";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
+  
+  gridViewStyle: {
     display: "grid",
     overflow:" hidden",
     width: "80%",
@@ -16,6 +17,18 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     
     backgroundColor: theme.palette.background.paper
+  },
+  listViewStyle:{
+
+    display: "flex",
+    overflow:" hidden",
+    width: "80%",
+    margin: "auto",
+    
+    flexDirection:"column",
+    justifyContent:"center",
+
+    overflow: "hidden",
   },
   gridList: {
     width: "100%",
@@ -40,19 +53,31 @@ const BottomBar = ({
 
   const [addnote, setAddNote] = useState(false);
   const [title, setTitle] = useState(null);
+  const [display,setDisplay] = useState(false);
+
+  useEffect(()=>{
+    console.log(localStorage.getItem('list'))
+    if(localStorage.getItem('list')=='true')
+    {
+      setDisplay(true);
+    }
+
+    else
+    setDisplay(false)
+  },[localStorage.getItem('list')]);
   const btnClick = (e) => {
     console.log("new btn clicked");
     setAddNote(!addnote);
   };
-  const updateFile = (e) => {
-    setTitle(e.target.value);
-  };
-  const submitNote = () => {
-    //pass the title of the new note to the app.js component nd set the current title to null 
-    newNote(title);
-    setTitle("");
-    setAddNote(false);
-  };
+  // const updateFile = (e) => {
+  //   setTitle(e.target.value);
+  // };
+  // const submitNote = () => {
+  //   //pass the title of the new note to the app.js component nd set the current title to null 
+  //   newNote(title);
+  //   setTitle("");
+  //   setAddNote(false);
+  // };
   const selectNote = (note, index) => {
     selectNotes(note, index);
   };
@@ -63,7 +88,7 @@ const BottomBar = ({
     <div className={classes.bottomBarComponent}>
       {note ? (
         <div className={classes.barComponentMain}>
-          <div className={classes.root}>
+          <div className={display ? classes.listViewStyle:classes.gridViewStyle}>
               {
               note.map((n, index) => {
               return (
@@ -83,27 +108,7 @@ const BottomBar = ({
               );
               })}
           </div>
-          {/* classes.sidebarContainer */}
-
-{/* 
-          <Button className={classes.newNoteBtn} onClick={(e) => btnClick(e)}>
-            {addnote ? "Cancel" : "New Note"}
-          </Button> */}
-
-
-          {/* {addnote ? ( */}
-            
-               {/* <input class="ql-editor" data-gramm="false" contenteditable="true" onKeyUp={(e) => updateFile(e)} placeholder="title"/> */}
-              {/* <input
-                type="text"
-                placeholder="enter title"
-                onKeyUp={(e) => updateFile(e)}
-              /> */}
-              {/* <Button onClick={submitNote}>Submit Note</Button> */}
-            
-          {/* ) : null} */}
-
-          
+       
         </div>
       ) : (
         null
@@ -111,5 +116,4 @@ const BottomBar = ({
     </div>
   );
 };
-// export default BottomBar;
 export default withStyles(styles)(BottomBar);

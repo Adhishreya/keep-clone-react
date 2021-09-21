@@ -6,13 +6,14 @@ import BottomBar from "./bottomBar/BottomBar.js";
 import firebase from "firebase";
 import styles from './App.module.css';
 import {Menu,Search,Refresh,ViewStream,Apps,Settings, AccountCircle} from '@material-ui/icons';
+// import GridViewIcon from '@mui/icons-material/GridView';
 import { Typography ,AppBar,InputBase} from "@material-ui/core";
 const App = () => {
   var provider = new firebase.auth.GoogleAuthProvider();
   const [selectNoteIndex, setNoteIndex] = useState(null);
   const [selectNote, setSelectNote] = useState(null);
   const [note, setNote] = useState(null);
-  const [listVew,setListView] = useState(false);
+  const [listVew,setListView] = useState(true);
   const collection = "notes";
   useEffect(() => {
     firebase
@@ -42,8 +43,6 @@ const App = () => {
     if(body==""||body==null)
     body="";
     const notes = { title: title, body: body };
-    // console.log(title+" "+body)
-
     const newFromDB = await firebase.firestore().collection("notes").add({
       title: notes.title,
       body: notes.body,
@@ -68,7 +67,7 @@ const App = () => {
      
       setSelectNote(null);
       setNoteIndex(null);
-      console.log(delIndex+" "+selectNoteIndex);
+      // console.log(delIndex+" "+selectNoteIndex);
     } else {
       if (note.length > 1) {
         selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1);
@@ -101,10 +100,15 @@ const App = () => {
     setSelectNote(null);
         setNoteIndex(null);
   }
-  // const deleteNotes = () => {};
+
+  const viewStyle = () =>{
+    if(listVew)
+    localStorage.setItem('list',true)
+    else
+    localStorage.setItem('list',false)
+  }
   return (
 
-    // <div className="app-container App">
       <div className={styles.appContainer}>
       <AppBar className={styles.containerBar} >
           <div className={styles.containerMain}>
@@ -122,9 +126,9 @@ const App = () => {
                   />
               </div>
               <Refresh className={styles.refresh}/>
-              {/* {listVew ? <ViewStream className={styles.view} onClick={()=>{setListView(false)}}/> : <App/>} */}
+            {listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>}
               <Settings className={styles.setting}/>
-              <Apps className={styles.apps}/>
+              {/* <Apps className={styles.apps}/> */}
               <AccountCircle className={styles.account}/>
           </div>
       </AppBar>
