@@ -63,9 +63,12 @@ const App = () => {
     // await
      setNote(note.filter((n) => not != n));//altering the note value by removing the passed note object from the list
     const delIndex = note.indexOf(not);
-    if (delIndex == selectNoteIndex) {
+    
+    if (delIndex === selectNoteIndex) {
+     
       setSelectNote(null);
       setNoteIndex(null);
+      console.log(delIndex+" "+selectNoteIndex);
     } else {
       if (note.length > 1) {
         selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1);

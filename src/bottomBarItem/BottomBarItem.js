@@ -32,8 +32,16 @@ var gridStyle =
 {
     overflow:" hidden",
     height:"4rem",
+    color:"black",
+    borderRadius:"0.5rem",
     backgroundColor: "white",
     border:"2px solid #fff"
+}
+var titleStyl=
+{
+  color:"black",
+    borderRadius:"0.5rem",
+    backgroundColor: "white",
 }
 const BottomBarItem = ({
   note,
@@ -47,8 +55,8 @@ const BottomBarItem = ({
   return (
     <div key={index} className={classes.bottomBarItemComponent}>
       <GridList 
-       style={gridStyle}
-        onClick={() => selectNote(note, index)}
+       style={gridStyle}       
+        onClick={() =>{ selectNote(note, index);console.log(index)}}
         className={classes.gridListMain} 
         selected={selectNoteIndex === index}
       >
@@ -85,6 +93,7 @@ const BottomBarItem = ({
                         `Are you sure you want to delete this note? ${note.title}`
                       )
                     )
+                    selectNote(note, index)
                       deleteNote(note, index);
                   }}
                 ></Delete>

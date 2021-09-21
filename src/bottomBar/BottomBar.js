@@ -14,11 +14,13 @@ const useStyles = makeStyles((theme) => ({
     gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
     gridGap: "2rem",
     overflow: "hidden",
+    
     backgroundColor: theme.palette.background.paper
   },
   gridList: {
     width: "100%",
-    height: "100%"
+    height: "100%",
+    borderRadius:"1rem"
   },
   icon: {
     color: "rgba(255, 255, 255, 0.54)"

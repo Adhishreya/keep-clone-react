@@ -1,3 +1,8 @@
+:root
+{
+    --var-primary-bg:white;
+    --var-primary-color:black;
+}
 .appContainer
 {
     height: 100%;
