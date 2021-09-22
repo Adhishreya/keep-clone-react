@@ -1,5 +1,5 @@
 import "./styles.css";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { projectFirestore } from "./firebase/config.js";
 import Editor from "./editor/Editor.js";
 import BottomBar from "./bottomBar/BottomBar.js";
@@ -16,6 +16,7 @@ const App = () => {
   const [light,setLight] = useState(true);
   const [searchResult,setSearchResult] = useState([]);
   const [searchValue,setSearchValue] = useState("")
+  const searchRef = useRef(null);
   const collection = "notes";
 
   useEffect(()=>{
@@ -73,17 +74,18 @@ const App = () => {
 
   const deleteNotes = async (not) => {
     // await
+    const delIndex = note.indexOf(not);
      setNote(note.filter((n) => not != n));//altering the note value by removing the passed note object from the list
      if(searchResult)
      setSearchResult(searchResult.filter((n) => not != n))
-    const delIndex = note.indexOf(not);
+     console.log(delIndex+" "+selectNoteIndex);
     
     if (delIndex === selectNoteIndex) {
      
       setSelectNote(null);
       setNoteIndex(null);
       setSearchResult(null);
-      // console.log(delIndex+" "+selectNoteIndex);
+      // 
     } else {
       if (note.length > 1) {
         selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1);
@@ -145,11 +147,13 @@ const App = () => {
     setListView(true)
     localStorage.removeItem('list');
     localStorage.removeItem('theme');
+    searchRef.current.value=""
     setSelectNote(null);
     setNoteIndex(null);
     setSearchValue(null);
     setSearchResult(null);
   }
+
   return (
 
       <div className={light ? styles.appContainerLight : styles.appContainerDark}>
@@ -161,8 +165,12 @@ const App = () => {
 
               <div className={styles.search}>
                   <Search className={styles.searchIcon} />
-                  <InputBase
+                  <input
+                  type="text"
                   placeholder="Search…"
+                  ref={searchRef}
+                  style={{width:"80%",height:"2rem",border:"none"}}
+                  value = {null}
                   onChange={e=>setSearchValue(e.target.value)}
                   className={styles.input}
                   inputProps={{ 'aria-label': 'search' }}
@@ -183,6 +191,7 @@ const App = () => {
                 selectedNote={selectNote?selectNote:{id:null}}//passing the select note object
                 selectNoteIndex={selectNoteIndex}
                 note={note}
+                selectNotes={selectNotes}
                 newNote={newNote}
                 noteUpdate={noteUpdate}//passing the note update function to child component
         />

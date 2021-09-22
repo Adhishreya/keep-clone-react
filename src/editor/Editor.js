@@ -97,9 +97,19 @@ const Editor = ({
         else
         {
           if(selectedNote)
-          {noteUpdate(selectedNote.id,{title:title,body:body});}
+          {
+              if(title==""||title==null)
+              {setTitle("Untitled");}
+
+              if(body==""||body==null)
+              {setBody("");}
+            noteUpdate(selectedNote.id,{title:title,body:body});
+        }
           inputReference.current.value="";
-          bodyReference.current.value="";
+          bodyReference.current.value="";      
+      // console.log(inputReference.current);
+      setTitle(inputReference.current.value);
+      setBody(inputReference.current.value);
           setSave(true);
         }
         }}>Save Note</Button>

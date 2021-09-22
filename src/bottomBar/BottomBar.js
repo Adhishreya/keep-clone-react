@@ -84,9 +84,7 @@ const BottomBar = ({
   const deleteNote = (note) => {
     deleteNotes(note);
   };
-  useEffect(()=>{
-    console.log(note)
-  },[note])
+
   return (
     <div className={classes.bottomBarComponent}>
       {note ? (
