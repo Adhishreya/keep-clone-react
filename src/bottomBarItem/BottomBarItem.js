@@ -90,11 +90,12 @@ const BottomBarItem = ({
               >
                 <Delete
                   onClick={() => {
-                    if (
-                      window.confirm(
-                        `Are you sure you want to delete this note? ${note.title}`
-                      )
-                    )
+                    // if (
+                    //   window.confirm(
+                    //     `Are you sure you want to delete this note? ${note.title}`
+                    //   )
+                    // )
+                    console.log("deleting"+ index)
                     selectNote(note, index)
                       deleteNote(note, index);
                   }}

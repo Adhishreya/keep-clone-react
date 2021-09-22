@@ -46,10 +46,21 @@ const App = () => {
   }, [collection]);
 
   function selectNotes(note, index) {
+    console.log(note.title+"  App module "+index)
     setNoteIndex(index);
     setSelectNote(note);
     //select the note position from a list of notes and also store/obtain the note object.
   }
+
+  // useEffect(() => {
+  //   //update the component with the contents of the selected note object
+  //      setTitle(selectedNote.title);
+  //      setBody(selectedNote.body);
+  //      if(selectedNote.id)
+  //      setId(selectedNote.id);
+  //    }, [selectedNote.id]);
+
+
   const newNote = async (title,body) => {
     //initially store the document even if the body is empty
     if(title==""||title==null)
@@ -85,14 +96,16 @@ const App = () => {
       setSelectNote(null);
       setNoteIndex(null);
       setSearchResult(null);
+      refresh();
       // 
     } else {
       if (note.length > 1) {
-        selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1);
-      } else {
+      //   selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1);
+      // } else {
         setSelectNote(null);
-        setSearchResult(null)
+        setSearchResult(null);
         setNoteIndex(null);
+        refresh();
       }
 
       // note.length > 1
@@ -103,6 +116,7 @@ const App = () => {
       //      setNoteIndex(null);}
     }
     firebase.firestore().collection("notes").doc(not.id).delete();
+    refresh();
   };
   function noteUpdate(index, noteObj) {
     // console.log(index);
@@ -161,7 +175,7 @@ const App = () => {
           <div className={styles.containerMain}>
               {/* <Menu className={styles.hamburger}/> */}
               <img src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png" alt="KeepIcon" className={styles.image}/>
-              <Typography color="textSecondary" className={styles.heading}>Keep</Typography>
+              {/* <Typography color="textSecondary" className={styles.heading}>Keep</Typography> */}
 
               <div className={styles.search}>
                   <Search className={styles.searchIcon} />
@@ -173,7 +187,7 @@ const App = () => {
                   value = {null}
                   onChange={e=>setSearchValue(e.target.value)}
                   className={styles.input}
-                  inputProps={{ 'aria-label': 'search' }}
+                  // inputProps={{ 'aria-label': 'search' }}
                   />
               </div>
               <Refresh className={styles.refresh} onClick={()=>refresh()}/>

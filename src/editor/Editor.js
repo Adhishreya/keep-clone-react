@@ -12,16 +12,16 @@ const Editor = ({
   newNote,
   noteUpdate
 }) => {
-  const [text, setText] = useState("");
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [id, setId] = useState("");
+  const [text, setText] = useState(null);
+  const [title, setTitle] = useState(null);
+  const [body, setBody] = useState(null);
+  const [id, setId] = useState(null);
   const inputReference = useRef(null);
   const bodyReference = useRef(null);
   const [save,setSave] = useState(true);
 
   useEffect(()=>{
-    // console.log(selectNoteIndex)
+    console.log("selected note "+selectedNote+"   selected index "+selectNoteIndex+" in both monitoring" );
     if(selectNoteIndex !=null)
     {
       inputReference.current.value=selectedNote.title;
@@ -30,17 +30,23 @@ const Editor = ({
     }
     else
     {
-      inputReference.current.value="";
-      bodyReference.current.value="";
+      inputReference.current.value=null;
+      bodyReference.current.value=null;
+      setSave(true); 
     }
-  },[selectNoteIndex,selectedNote])
+  },[selectNoteIndex,selectedNote]);
 
   useEffect(() => {
  //update the component with the contents of the selected note object
-    setTitle(selectedNote.title);
-    setText(selectedNote.body);
-    if(selectedNote.id)
+ if(selectedNote.id)
+{    setTitle(selectedNote.title);
+    setBody(selectedNote.body);
+  
     setId(selectedNote.id);
+  
+}
+else
+setSave(false); 
   }, [selectedNote.id]);
 
 
@@ -92,12 +98,15 @@ const Editor = ({
         <textarea ref={bodyReference} value={null} className={classes.inputNoteComponent} onChange={(e)=>setBody(e.target.value)} placeholder="Take a note ...."/>
       </div>
       <Button onClick={()=>{
-        if(save)
-        {submitNote()}
+        if(selectedNote.id==null)
+        {
+          console.log("saving");
+          submitNote()
+        }
         else
         {
-          if(selectedNote)
-          {
+          if(selectNoteIndex !=null)
+          {console.log("updating"+selectedNote);
               if(title==""||title==null)
               {setTitle("Untitled");}
 
