@@ -21,7 +21,7 @@ const Editor = ({
   const [save,setSave] = useState(true);
 
   useEffect(()=>{
-    console.log("selected note "+selectedNote+"   selected index "+selectNoteIndex+" in both monitoring" );
+    console.log("selected note "+selectedNote.body+"   selected index "+selectNoteIndex+" in both monitoring" +selectedNote.id);
     if(selectNoteIndex !=null)
     {
       inputReference.current.value=selectedNote.title;
@@ -46,7 +46,11 @@ const Editor = ({
   
 }
 else
-setSave(false); 
+{
+  setSave(false);
+  setTitle(null);
+  setBody(null);
+}
   }, [selectedNote.id]);
 
 
@@ -106,7 +110,7 @@ setSave(false);
         else
         {
           if(selectNoteIndex !=null)
-          {console.log("updating"+selectedNote);
+          {console.log("updating"+selectedNote.title);
               if(title==""||title==null)
               {setTitle("Untitled");}
 

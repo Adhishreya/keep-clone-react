@@ -30,6 +30,7 @@ const App = () => {
   }
   },[searchValue])
   useEffect(() => {
+    console.log(selectNote)
     firebase
       .firestore()
       .collection(collection)
@@ -80,7 +81,7 @@ const App = () => {
     // const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);//returns the note object of the currently added node (by filtering the notes array using the id of the newly added document)
 
     setNoteIndex(null);
-    setSelectNote(null);
+    setSelectNote({body:null,title:null,id:null});
   };
 
   const deleteNotes = async (not) => {
@@ -93,7 +94,7 @@ const App = () => {
     
     if (delIndex === selectNoteIndex) {
      
-      setSelectNote(null);
+      setSelectNote({body:null,title:null,id:null});
       setNoteIndex(null);
       setSearchResult(null);
       refresh();
@@ -102,7 +103,7 @@ const App = () => {
       if (note.length > 1) {
       //   selectNotes(note[selectNoteIndex - 1], selectNoteIndex - 1);
       // } else {
-        setSelectNote(null);
+        setSelectNote({body:null,title:null,id:null});
         setSearchResult(null);
         setNoteIndex(null);
         refresh();
@@ -115,7 +116,8 @@ const App = () => {
       //   )
       //      setNoteIndex(null);}
     }
-    firebase.firestore().collection("notes").doc(not.id).delete();
+    console.log(selectNoteIndex)
+  await firebase.firestore().collection("notes").doc(not.id).delete();
     refresh();
   };
   function noteUpdate(index, noteObj) {
@@ -130,7 +132,7 @@ const App = () => {
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
       //update the note by obtaining the title and the corresponding body of the note from the user and updating the timetamp 
     });
-    setSelectNote(null);
+    setSelectNote({body:null,title:null,id:null});
         setNoteIndex(null);
   }
   // useEffect(()=>{
@@ -162,7 +164,7 @@ const App = () => {
     localStorage.removeItem('list');
     localStorage.removeItem('theme');
     searchRef.current.value=""
-    setSelectNote(null);
+    setSelectNote({body:null,title:null,id:null});
     setNoteIndex(null);
     setSearchValue(null);
     setSearchResult(null);

@@ -96,8 +96,8 @@ const BottomBarItem = ({
                     //   )
                     // )
                     console.log("deleting"+ index)
-                    selectNote(note, index)
-                      deleteNote(note, index);
+                    // selectNote(note, index)
+                      deleteNote(note);
                   }}
                 ></Delete>
               </IconButton>
