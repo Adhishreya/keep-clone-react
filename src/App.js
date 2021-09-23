@@ -30,7 +30,7 @@ const App = () => {
   }
   },[searchValue])
   useEffect(() => {
-    console.log(selectNote)
+    // console.log(selectNote)
     firebase
       .firestore()
       .collection(collection)
@@ -47,7 +47,7 @@ const App = () => {
   }, [collection]);
 
   function selectNotes(note, index) {
-    console.log(note.title+"  App module "+index)
+    // console.log(note.title+"  App module "+index)
     setNoteIndex(index);
     setSelectNote(note);
     //select the note position from a list of notes and also store/obtain the note object.
@@ -90,7 +90,7 @@ const App = () => {
      setNote(note.filter((n) => not != n));//altering the note value by removing the passed note object from the list
      if(searchResult)
      setSearchResult(searchResult.filter((n) => not != n))
-     console.log(delIndex+" "+selectNoteIndex);
+    //  console.log(delIndex+" "+selectNoteIndex);
     
     if (delIndex === selectNoteIndex) {
      
@@ -116,7 +116,7 @@ const App = () => {
       //   )
       //      setNoteIndex(null);}
     }
-    console.log(selectNoteIndex)
+    // console.log(selectNoteIndex)
   await firebase.firestore().collection("notes").doc(not.id).delete();
     refresh();
   };
@@ -158,7 +158,7 @@ const App = () => {
     localStorage.setItem('theme',false)
   }
   const refresh = () =>{
-    console.log("refreshed")
+    // console.log("refreshed")
     //clear all the currently cached data
     setListView(true)
     localStorage.removeItem('list');

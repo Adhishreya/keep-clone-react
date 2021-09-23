@@ -95,7 +95,7 @@ const BottomBarItem = ({
                     //     `Are you sure you want to delete this note? ${note.title}`
                     //   )
                     // )
-                    console.log("deleting"+ index)
+                    // console.log("deleting"+ index)
                     // selectNote(note, index)
                       deleteNote(note);
                   }}
