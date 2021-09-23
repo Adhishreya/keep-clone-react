@@ -15,7 +15,8 @@ const App = () => {
   const [listVew,setListView] = useState(true);
   const [light,setLight] = useState(true);
   const [searchResult,setSearchResult] = useState([]);
-  const [searchValue,setSearchValue] = useState("")
+  const [searchValue,setSearchValue] = useState("");
+  const [mobile,setMobile] = useState(false);
   const searchRef = useRef(null);
   const collection = "notes";
 
@@ -53,14 +54,6 @@ const App = () => {
     //select the note position from a list of notes and also store/obtain the note object.
   }
 
-  // useEffect(() => {
-  //   //update the component with the contents of the selected note object
-  //      setTitle(selectedNote.title);
-  //      setBody(selectedNote.body);
-  //      if(selectedNote.id)
-  //      setId(selectedNote.id);
-  //    }, [selectedNote.id]);
-
 
   const newNote = async (title,body) => {
     //initially store the document even if the body is empty
@@ -78,8 +71,6 @@ const App = () => {
     const newId = newFromDB.id;
     // obtain the newly added note and add to the current state
      setNote([...note, notes]);
-    // const newNteINdex = note.indexOf(note.filter((nt) => nt.id == newId)[0]);//returns the note object of the currently added node (by filtering the notes array using the id of the newly added document)
-
     setNoteIndex(null);
     setSelectNote({body:null,title:null,id:null});
   };
@@ -90,8 +81,7 @@ const App = () => {
      setNote(note.filter((n) => not != n));//altering the note value by removing the passed note object from the list
      if(searchResult)
      setSearchResult(searchResult.filter((n) => not != n))
-    //  console.log(delIndex+" "+selectNoteIndex);
-    
+
     if (delIndex === selectNoteIndex) {
      
       setSelectNote({body:null,title:null,id:null});
@@ -158,7 +148,6 @@ const App = () => {
     localStorage.setItem('theme',false)
   }
   const refresh = () =>{
-    // console.log("refreshed")
     //clear all the currently cached data
     setListView(true)
     localStorage.removeItem('list');
@@ -169,13 +158,12 @@ const App = () => {
     setSearchValue(null);
     setSearchResult(null);
   }
-
   return (
 
       <div className={light ? styles.appContainerLight : styles.appContainerDark}>
       <AppBar className={styles.containerBar} >
           <div className={styles.containerMain}>
-              {/* <Menu className={styles.hamburger}/> */}
+
               <img src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png" alt="KeepIcon" className={styles.image}/>
               {/* <Typography color="textSecondary" className={styles.heading}>Keep</Typography> */}
 
@@ -192,12 +180,16 @@ const App = () => {
                   // inputProps={{ 'aria-label': 'search' }}
                   />
               </div>
+
+              <div className={(mobile) ? styles.clickView : styles.rightFloat}>
               <Refresh className={styles.refresh} onClick={()=>refresh()}/>
-            {listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>}
+            {(listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>)}
               {/* <Settings className={styles.setting}/> */}
               {light?<Brightness4 className={styles.setting} onClick={()=>{setLight(false);viewTheme();}}/>:<Brightness7 className={styles.setting} onClick={()=>{setLight(true);viewTheme();}}/>}
               {/* <Apps className={styles.apps}/> */}
               <AccountCircle className={styles.account}/>
+              </div>
+              <Menu className={styles.hamburger} onClick={()=>{setMobile(mobile=>!mobile);console.log(mobile)}}/>
           </div>
       </AppBar>
     

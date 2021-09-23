@@ -12,6 +12,7 @@
     background: var(--var-primary-bg);
     color: var(--var-primary-color);
 }
+
 .appContainerDark
 {
     /* height: 100%; */
@@ -46,12 +47,20 @@
 .image
 {
     width: 2rem;
+    float: left;
+    position: fixed;
 }
 .hamburger
 {
     color: rgb(0, 0, 0);
+    display: none!important;
 }
-
+.rightFloat
+{
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+}
 
 .search {
     background-color: rgb(199, 199, 199);
@@ -63,7 +72,8 @@
     // }, */
     /* margin-left: -10px; */
     width: 20%;
-    display: inline-block;
+    /* display: inline-block; */
+    display: flex;
     /* padding: 0.5rem; */
     border-radius: 0.4rem;
      /* [theme.breakpoints.up('sm')]: {
@@ -136,3 +146,33 @@
 }
 .inputNoteComponent{height: 3rem; scroll-behavior: smooth;overflow-x: hidden;}
 .inputTitleComponent{height: 2rem;font-weight: 700;}
+
+@media screen and (max-width: 600px) {
+    .rightFloat
+    {
+        display: none;
+    }
+    .hamburger
+    {
+        display: block!important;
+        float: right;
+        width: 25%;
+        float: right;
+        margin: auto;
+        position: absolute;
+        right: 0;
+    }
+    .clickView
+{
+    position: absolute;
+    align-items: center;
+    /* border: 1px solid black; */
+    background: hsl(0,0%,100%);
+    display: flex;
+    right: 0;
+    margin: 2%;
+    width: 15%;
+    top:99%;
+    flex-direction: column;
+}
+}
