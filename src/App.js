@@ -13,7 +13,7 @@ const App = () => {
   const [selectNote, setSelectNote] = useState(null);
   const [note, setNote] = useState(null);
   const [listVew,setListView] = useState(true);
-  const [light,setLight] = useState(true);
+  const [lights,setLight] = useState(true);
   const [searchResult,setSearchResult] = useState([]);
   const [searchValue,setSearchValue] = useState("");
   const [mobile,setMobile] = useState(false);
@@ -142,10 +142,11 @@ const App = () => {
     localStorage.setItem('list',false)
   }
   const viewTheme = () =>{
-    if(listVew)
-    localStorage.setItem('theme',true)
+    console.log((localStorage.getItem('theme')));
+    if(lights)
+    localStorage.setItem('theme','light')
     else
-    localStorage.setItem('theme',false)
+    localStorage.setItem('theme','dark')
   }
   const refresh = () =>{
     //clear all the currently cached data
@@ -160,7 +161,7 @@ const App = () => {
   }
   return (
 
-      <div className={light ? styles.appContainerLight : styles.appContainerDark}>
+      <div>
       <AppBar className={styles.containerBar} >
           <div className={styles.containerMain}>
 
@@ -185,7 +186,7 @@ const App = () => {
               <Refresh className={styles.refresh} onClick={()=>refresh()}/>
             {(listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>)}
               {/* <Settings className={styles.setting}/> */}
-              {light?<Brightness4 className={styles.setting} onClick={()=>{setLight(false);viewTheme();}}/>:<Brightness7 className={styles.setting} onClick={()=>{setLight(true);viewTheme();}}/>}
+              {lights?<Brightness4 onClick={()=>{setLight(false);viewTheme();}}/>:<Brightness7  onClick={()=>{setLight(true);viewTheme();}}/>}
               {/* <Apps className={styles.apps}/> */}
               <AccountCircle className={styles.account}/>
               </div>
