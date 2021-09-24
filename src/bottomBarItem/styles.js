@@ -10,7 +10,7 @@ const styles = (theme) => ({
     right: "5px",
     top: "calc(50% - 15px)",
     "&:hover": {
-      color: "red"
+      // color: "red"
     }
   },
   titleStyle:{
