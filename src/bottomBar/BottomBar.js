@@ -9,30 +9,31 @@ const useStyles = makeStyles((theme) => ({
   
   gridViewStyle: {
     display: "grid",
-    overflow:" hidden",
+    // overflow:" hidden",
     width: "80%",
     margin: "auto",
-    gridTemplateColumns: "repeat(auto-fit,minmax(200px,1fr))",
+    gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
     gridGap: "2rem",
-    overflow: "hidden",
+    height:"4rem",
+    // overflow: "hidden",
     
-    backgroundColor: theme.palette.background.paper
+    // backgroundColor: theme.palette.background.paper
   },
   listViewStyle:{
 
     display: "flex",
-    overflow:" hidden",
+    // overflow:" hidden",
     width: "80%",
     margin: "auto",
     
     flexDirection:"column",
     justifyContent:"center",
 
-    overflow: "hidden",
+    // overflow: "hidden",
   },
   gridList: {
     width: "100%",
-    height: "100%",
+    height: "6rem",
     borderRadius:"1rem"
   },
   icon: {

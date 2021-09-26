@@ -34,6 +34,13 @@ const styles = (theme) => ({
     position: "relative",
     // top: "5rem"
   },
+  submitButton:
+  {
+    width:"fit-content",
+    margin:"2% auto",
+    padding:"1rem",
+    boxShadow:"0rem 0rem 3px 4px #9ca3af;"
+  },
   inputArea:{
     // background:'rgb(225,0,0)',
     // display:'grid',

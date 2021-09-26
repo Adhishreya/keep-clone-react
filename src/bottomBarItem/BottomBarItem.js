@@ -3,6 +3,7 @@ import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
 import { removeHTMLTags } from "../helper/debounce.js";
 import IconButton from "@material-ui/core/IconButton";
+import { useTheme } from '@material-ui/styles';
 import {
   Button,
   ListItem,
@@ -21,25 +22,31 @@ import { dark, light } from "@material-ui/core/styles/createPalette";
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "grid",
-    overflow:" hidden",
+    // overflow:" hidden",
     height:"4rem !important",
-    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+    gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
     gridGap: "1rem",
-    backgroundColor: theme.palette.background.paper
+    border:"none",
+    // backgroundColor: theme.palette.background.paper
   },
   gridList: {
     width: "fit - content",
+    
     height: "fit - content"
+  },
+  bodyElement:{
+    color:theme.text.primaryColor
   }
+
 }));
 var gridStyle =
 {
-    overflow:" hidden",
-    height:"4rem",
+    // overflow:" hidden",
+    height:"2rem",
     // color:"black",
     borderRadius:"0.5rem",
     // backgroundColor: "white",
-    border:"2px solid #fff"
+    // border:"2px solid #fff"
 }
 var titleStyl=
 {
@@ -55,9 +62,10 @@ const BottomBarItem = ({
   deleteNote
 }) => {
   const classes = useStyles(dark);
-
+  const theme = useTheme();
+  console.log(theme.text.primaryColor)
   return (
-    <div key={index} className={classes.bottomBarItemComponent}>
+    <div key={index} className={classes.bottomBarItemComponent} style = {{color:theme.text.primaryColor}}>
       <GridList 
        style={gridStyle}       
         onClick={() =>{ selectNote(note, index);
@@ -111,7 +119,7 @@ const BottomBarItem = ({
           />
         </GridListTile>
       </GridList>
-      <div>
+      <div className={classes.bodyElement} style={{color:theme.text.primaryColor}}>
         {removeHTMLTags(note.body.substring(0, 20) + "....")}
       </div>
     </div>

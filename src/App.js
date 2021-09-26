@@ -5,9 +5,10 @@ import Editor from "./editor/Editor.js";
 import BottomBar from "./bottomBar/BottomBar.js";
 import firebase from "firebase";
 import styles from './App.module.css';
+import { useTheme } from '@material-ui/styles';
 import {Menu,Search,Refresh,ViewStream,Apps,Settings, AccountCircle,Brightness4,Brightness7} from '@material-ui/icons';
 import { Typography ,AppBar,InputBase} from "@material-ui/core";
-const App = () => {
+const App = ({handler}) => {
   var provider = new firebase.auth.GoogleAuthProvider();
   const [selectNoteIndex, setNoteIndex] = useState(null);
   const [selectNote, setSelectNote] = useState(null);
@@ -19,7 +20,8 @@ const App = () => {
   const [mobile,setMobile] = useState(false);
   const searchRef = useRef(null);
   const collection = "notes";
-
+  const theme = useTheme();
+  // console.log(theme)
   useEffect(()=>{
     if(note!=null&&searchValue!=null)
   {  const results = note.filter((e,i)=>{
@@ -44,11 +46,9 @@ const App = () => {
         });
         setNote(notes);
       });
-    // console.log(note);
   }, [collection]);
 
   function selectNotes(note, index) {
-    // console.log(note.title+"  App module "+index)
     setNoteIndex(index);
     setSelectNote(note);
     //select the note position from a list of notes and also store/obtain the note object.
@@ -142,12 +142,15 @@ const App = () => {
     localStorage.setItem('list',false)
   }
   const viewTheme = () =>{
-    console.log((localStorage.getItem('theme')));
+    // console.log((localStorage.getItem('theme')));
     if(lights)
     localStorage.setItem('theme','light')
     else
     localStorage.setItem('theme','dark')
+
+    handler();
   }
+
   const refresh = () =>{
     //clear all the currently cached data
     setListView(true)
@@ -160,15 +163,13 @@ const App = () => {
     setSearchResult(null);
   }
   return (
-
-      <div>
+// style = {{background:theme.palette.primary.main}}
+      <div className={styles.MainContainer} style = {{background:theme.palette.primary.main}}>
       <AppBar className={styles.containerBar} >
           <div className={styles.containerMain}>
 
               <img src="https://www.gstatic.com/images/branding/product/2x/keep_2020q4_48dp.png" alt="KeepIcon" className={styles.image}/>
-              {/* <Typography color="textSecondary" className={styles.heading}>Keep</Typography> */}
-
-              <div className={styles.search}>
+       <div className={styles.search}>
                   <Search className={styles.searchIcon} />
                   <input
                   type="text"
@@ -178,11 +179,10 @@ const App = () => {
                   value = {null}
                   onChange={e=>setSearchValue(e.target.value)}
                   className={styles.input}
-                  // inputProps={{ 'aria-label': 'search' }}
                   />
               </div>
 
-              <div className={(mobile) ? styles.clickView : styles.rightFloat}>
+              <div className={(mobile) ? styles.clickView : styles.rightFloat} style = {{background:theme.palette.primary.main}}>
               <Refresh className={styles.refresh} onClick={()=>refresh()}/>
             {(listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>)}
               {/* <Settings className={styles.setting}/> */}

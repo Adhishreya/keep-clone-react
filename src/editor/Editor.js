@@ -101,7 +101,7 @@ else
         <input ref={inputReference} value={null} className={classes.inputTitleComponent} onChange={(e)=>setTitle(e.target.value)} placeholder="title" type="text"/>
         <textarea ref={bodyReference} value={null} className={classes.inputNoteComponent} onChange={(e)=>setBody(e.target.value)} placeholder="Take a note ...."/>
       </div>
-      <Button onClick={()=>{
+      <Button className={classes.submitButton} onClick={()=>{
         if(selectedNote.id==null)
         {
           // console.log("saving");
