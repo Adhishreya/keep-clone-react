@@ -1,13 +1,30 @@
-.appContainer
+/* :root
 {
-    height: 100%;
+    --var-primary-bg:white;
+    --var-primary-color:#6e6767;
+} */
+.appContainerLight
+{
+    /* height: 100%; */
     width: 100%;
     display: flex;
     flex-direction: column;
+    /* background: var(--var-primary-bg); */
+    /* color: var(--var-primary-color); */
+}
+
+.appContainerDark
+{
+    /* height: 100%; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--var-primary-color);
+    color: var(--var-primary-bg);
 }
 .containerBar
 {
-    background-color: rgb(255, 255, 255)!important;
+    /* background-color: rgb(255, 255, 255)!important; */
     /* width: fit-content; */
     border-radius: 0.3rem;
     height: 5rem!important;
@@ -30,12 +47,20 @@
 .image
 {
     width: 2rem;
+    float: left;
+    position: fixed;
 }
 .hamburger
 {
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0); */
+    display: none!important;
 }
-
+.rightFloat
+{
+    display: flex;
+    width: 25%;
+    justify-content: space-between;
+}
 
 .search {
     background-color: rgb(199, 199, 199);
@@ -47,7 +72,8 @@
     // }, */
     /* margin-left: -10px; */
     width: 20%;
-    display: inline-block;
+    /* display: inline-block; */
+    display: flex;
     /* padding: 0.5rem; */
     border-radius: 0.4rem;
      /* [theme.breakpoints.up('sm')]: {
@@ -71,12 +97,20 @@
     align-items: 'center';
     justify-content: 'center';
   }
+
+  .MainContainer
+  {
+      height: 100%;
+      width: 100%;
+  }
   .contentsMain
 {
   /* margin-top: 50%; */
-  position: relative;
-  position: relative;
+  /* position: relative; */
+  /* position: relative; */
     top: 21%;
+    position: absolute;
+    /* height: 100%; */
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -84,17 +118,17 @@
 }
 .refresh
 {
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0); */
 }
 
 .view
 {
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0); */
 }
 
 .setting,.apps,.account
 {
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0); */
 }
 .heading
 {
@@ -118,3 +152,34 @@
 }
 .inputNoteComponent{height: 3rem; scroll-behavior: smooth;overflow-x: hidden;}
 .inputTitleComponent{height: 2rem;font-weight: 700;}
+
+@media screen and (max-width: 680px) {
+    .rightFloat
+    {
+        display: none;
+    }
+    .hamburger
+    {
+        display: block!important;
+        float: right;
+        width: 25%;
+        float: right;
+        margin: auto;
+        position: absolute;
+        right: 0;
+    }
+    .clickView
+{
+    position: absolute;
+    align-items: center;
+    /* border: 1px solid black; */
+    background: hsl(0,0%,100%);
+    display: flex;
+    justify-content: center;
+    right: 0;
+    margin: 2%;
+    width: 15%;
+    top:99%;
+    flex-direction: column;
+}
+}

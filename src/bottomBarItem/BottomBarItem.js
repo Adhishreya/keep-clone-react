@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
+import React,{ useState, useEffect } from "react";
 import debounce from "../helper/debounce.js";
 import styles from "./styles.js";
 import { removeHTMLTags } from "../helper/debounce.js";
 import IconButton from "@material-ui/core/IconButton";
+import { useTheme } from '@material-ui/styles';
 import {
   Button,
   ListItem,
@@ -14,27 +14,45 @@ import {
 } from "@material-ui/core";
 import { Delete } from "@material-ui/icons";
 import { withStyles, makeStyles } from "@material-ui/core/styles";
+import { dark, light } from "@material-ui/core/styles/createPalette";
+
+
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "grid",
-    overflow:" hidden",
+    // overflow:" hidden",
     height:"4rem !important",
-    backgroundColor: "#fff",
-    gridTemplateColumns: "repeat(auto-fit,minmax(180px,1fr))",
+    gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
     gridGap: "1rem",
-    backgroundColor: theme.palette.background.paper
+    border:"none",
+    // backgroundColor: theme.palette.background.paper
   },
   gridList: {
     width: "fit - content",
+    
     height: "fit - content"
+  },
+  bodyElement:{
+    color:theme.text.primaryColor
   }
+
 }));
 var gridStyle =
 {
-    overflow:" hidden",
-    height:"4rem",
-    backgroundColor: "white",
-    border:"2px solid #fff"
+    // overflow:" hidden",
+    height:"2rem",
+    // color:"black",
+    borderRadius:"0.5rem",
+    // backgroundColor: "white",
+    // border:"2px solid #fff"
+}
+var titleStyl=
+{
+  // color:"black",
+    borderRadius:"0.5rem",
+    // backgroundColor: "white"
 }
 const BottomBarItem = ({
   note,
@@ -43,13 +61,16 @@ const BottomBarItem = ({
   selectNote,
   deleteNote
 }) => {
-  const classes = useStyles();
-
+  const classes = useStyles(dark);
+  const theme = useTheme();
+  console.log(theme.text.primaryColor)
   return (
-    <div key={index} className={classes.bottomBarItemComponent}>
+    <div key={index} className={classes.bottomBarItemComponent} style = {{color:theme.text.primaryColor}}>
       <GridList 
-       style={gridStyle}
-        onClick={() => selectNote(note, index)}
+       style={gridStyle}       
+        onClick={() =>{ selectNote(note, index);
+          // console.log(index)
+        }}
         className={classes.gridListMain} 
         selected={selectNoteIndex === index}
       >
@@ -81,12 +102,14 @@ const BottomBarItem = ({
               >
                 <Delete
                   onClick={() => {
-                    if (
-                      window.confirm(
-                        `Are you sure you want to delete this note? ${note.title}`
-                      )
-                    )
-                      deleteNote(note, index);
+                    // if (
+                    //   window.confirm(
+                    //     `Are you sure you want to delete this note? ${note.title}`
+                    //   )
+                    // )
+                    // console.log("deleting"+ index)
+                    // selectNote(note, index)
+                      deleteNote(note);
                   }}
                 ></Delete>
               </IconButton>
@@ -96,7 +119,7 @@ const BottomBarItem = ({
           />
         </GridListTile>
       </GridList>
-      <div>
+      <div className={classes.bodyElement} style={{color:theme.text.primaryColor}}>
         {removeHTMLTags(note.body.substring(0, 20) + "....")}
       </div>
     </div>
