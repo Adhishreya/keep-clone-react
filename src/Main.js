@@ -73,7 +73,7 @@ import App from "./App"
 
 
 const Main = () =>{
-  const [theme,setTheme] = useState(localStorage.getItem('theme')=="light");
+  const [theme,setTheme] = useState(false);
   const palleteType = theme ? "dark" : "light";
   const primaryColor = theme ? grey[900] : grey[50];
   const secondaryColor = theme ? grey[800] : grey[100];
@@ -100,10 +100,10 @@ const Main = () =>{
     }
   })
   const handler = () =>{
-      if(localStorage.getItem('theme')=="light")
-      setTheme(false);
-      else
-      setTheme(true);
+      // if(localStorage.getItem('theme')=="light")
+      // setTheme(false);
+      // else
+      setTheme(!theme);
   }
   return(<ThemeProvider theme={darkTheme}>
     <App handler={handler}/>

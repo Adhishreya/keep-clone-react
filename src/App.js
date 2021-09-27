@@ -143,10 +143,10 @@ const App = ({handler}) => {
   }
   const viewTheme = () =>{
     // console.log((localStorage.getItem('theme')));
-    if(lights)
-    localStorage.setItem('theme','light')
-    else
-    localStorage.setItem('theme','dark')
+    // if(lights)
+    // localStorage.setItem('theme','light')
+    // else
+    // localStorage.setItem('theme','dark')
 
     handler();
   }
@@ -163,7 +163,6 @@ const App = ({handler}) => {
     setSearchResult(null);
   }
   return (
-// style = {{background:theme.palette.primary.main}}
       <div className={styles.MainContainer} style = {{background:theme.palette.primary.main}}>
       <AppBar className={styles.containerBar} >
           <div className={styles.containerMain}>

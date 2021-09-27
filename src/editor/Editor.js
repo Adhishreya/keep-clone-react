@@ -104,14 +104,12 @@ else
       <Button className={classes.submitButton} onClick={()=>{
         if(selectedNote.id==null)
         {
-          // console.log("saving");
           submitNote()
         }
         else
         {
           if(selectNoteIndex !=null)
           {
-            // console.log("updating"+selectedNote.title);
               if(title==""||title==null)
               {setTitle("Untitled");}
 
