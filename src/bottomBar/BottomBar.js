@@ -10,11 +10,11 @@ const useStyles = makeStyles((theme) => ({
   gridViewStyle: {
     display: "grid",
     // overflow:" hidden",
-    width: "80%",
+    width: "95%",
     margin: "auto",
     gridTemplateColumns: "repeat(auto-fit,minmax(250px,1fr))",
     gridGap: "2rem",
-    height:"4rem",
+    height:"4rem"
     // overflow: "hidden",
     
     // backgroundColor: theme.palette.background.paper
