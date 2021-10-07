@@ -183,11 +183,13 @@ const App = ({handler}) => {
 
               <div className={(mobile) ? styles.clickView : styles.rightFloat} style = {{background:theme.palette.primary.main}}>
               <Refresh className={styles.refresh} onClick={()=>refresh()}/>
-            {(listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>)}
+            {/* <div className={styles.mobileView}> */}
+              {(listVew? <ViewStream className={styles.view} onClick={()=>{setListView(false);viewStyle();}}/>:<Apps className={styles.view} onClick={()=>{setListView(true);viewStyle()}}/>)}
+              {/* </div> */}
               {/* <Settings className={styles.setting}/> */}
               {lights?<Brightness4 onClick={()=>{setLight(false);viewTheme();}}/>:<Brightness7  onClick={()=>{setLight(true);viewTheme();}}/>}
               {/* <Apps className={styles.apps}/> */}
-              <AccountCircle className={styles.account}/>
+              {/* <AccountCircle className={styles.account}/> */}
               </div>
               <Menu className={styles.hamburger} onClick={()=>{setMobile(mobile=>!mobile);console.log(mobile)}}/>
           </div>
