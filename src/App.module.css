@@ -83,6 +83,10 @@
        
      } */
   }
+  textarea:focus,input:focus
+  {
+      outline: none!important;
+  }
   .input
   {
       width: 50%;
